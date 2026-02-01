@@ -659,8 +659,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627759837}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.48966354, y: 0, z: 0, w: 0.8719115}
-  m_LocalPosition: {x: -0.24797, y: 8.679949, z: -5.016555}
+  m_LocalRotation: {x: 0.43470415, y: 2.1337372e-17, z: -8.511476e-18, w: 0.9005734}
+  m_LocalPosition: {x: -0.12797001, y: 9.634949, z: -3.8015547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -679,7 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineRotationComposer
   Composition:
-    ScreenPosition: {x: 0, y: 0}
+    ScreenPosition: {x: 0, y: -0.07}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -688,8 +688,8 @@ MonoBehaviour:
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.5, y: 0.5}
+  TargetOffset: {x: 0, y: 3.83, z: 0}
+  Damping: {x: 0, y: 0}
   Lookahead:
     Enabled: 0
     Time: 0
@@ -707,9 +707,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5d7c088409d9a40b7b09aa707777f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineOrbitalFollow
-  TargetOffset: {x: 0, y: 6.32, z: 0}
+  TargetOffset: {x: 0, y: 7.19, z: 0}
   TrackerSettings:
-    BindingMode: 4
+    BindingMode: 1
     PositionDamping: {x: 1, y: 1, z: 1}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
@@ -727,7 +727,7 @@ MonoBehaviour:
       Radius: 2.5
       Height: 0.1
     SplineCurvature: 0.5
-  RecenteringTarget: 2
+  RecenteringTarget: 3
   HorizontalAxis:
     Value: 0
     Center: 0
@@ -778,9 +778,9 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 249407313}
-    LookAtTarget: {fileID: 0}
-    CustomLookAtTarget: 0
+    TrackingTarget: {fileID: 2123192122}
+    LookAtTarget: {fileID: 2123192122}
+    CustomLookAtTarget: 1
   Lens:
     FieldOfView: 73.5
     OrthographicSize: 5
@@ -814,13 +814,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineGroupFraming
   FramingMode: 2
-  FramingSize: 0.8
+  FramingSize: 0.2
   CenterOffset: {x: 0, y: 0}
   Damping: 2
   SizeAdjustment: 2
   LateralAdjustment: 0
-  FovRange: {x: 1, y: 100}
-  DollyRange: {x: -100, y: 100}
+  FovRange: {x: 1, y: 30}
+  DollyRange: {x: -100, y: 7.4}
   OrthoSizeRange: {x: 1, y: 1000}
 --- !u!1 &1823429973
 GameObject:
@@ -962,7 +962,7 @@ Transform:
   m_GameObject: {fileID: 1888884563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.50298, y: 1.2, z: 7.85}
+  m_LocalPosition: {x: 0.24, y: 1.2, z: 2.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1235,7 +1235,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 73.5
+  field of view: 30
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1261,8 +1261,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058688152}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.48966354, y: 0, z: 0, w: 0.87191147}
-  m_LocalPosition: {x: 0, y: 8.853529, z: -4.7685847}
+  m_LocalRotation: {x: 0.43470418, y: 2.2462622e-17, z: -1.0842643e-17, w: 0.9005733}
+  m_LocalPosition: {x: 0.08141391, y: 9.159657, z: -5.293933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1326,7 +1326,7 @@ Transform:
   m_GameObject: {fileID: 2123192121}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.3815987, y: 0.9369704, z: 3.471563}
+  m_LocalPosition: {x: -0.12797001, y: 0.94142, z: 0.96703005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1344,8 +1344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5eb80d8e62d9d145bb50fb783c0f731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineTargetGroup
-  PositionMode: 0
-  RotationMode: 0
+  PositionMode: 1
+  RotationMode: 1
   UpdateMethod: 2
   Targets:
   - Object: {fileID: 249407313}
