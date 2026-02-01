@@ -20,7 +20,7 @@ GhostRumble is a fast, skill-based arena game where two ghost-like entities duel
 ⸻
 
 2. Core Design Pillars
-	•	Constant Motion – Players never fully stop moving
+	•	Constant Motion – Players gradually lose their speed when not moving.
 	•	Precision over Spam – Shots can cancel each other out
 	•	Mind Games – Orbiting, spacing, and baiting are core skills
 	•	High Replayability – Short rounds, variable items, emergent encounters
@@ -175,6 +175,7 @@ Controller
 	•	Player hit
 	•	Item pickup
 	•	Subtle motion trails reinforce speed and direction
+	•	Arena (Spooky, Up-tempo, Orchestric (Vivaldi as Reference for example))
 
 ⸻
 
