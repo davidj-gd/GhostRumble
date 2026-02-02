@@ -10,8 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Move settings")]
     [SerializeField] float moveSpeed = 5f;
 
-    [Header("Look at target (e.g. AI for group framing)")]
-    [SerializeField] Transform lookAtTarget;
+    Transform lookAtTarget;
 
     [SerializeField] CinemachineCamera camera;
 
