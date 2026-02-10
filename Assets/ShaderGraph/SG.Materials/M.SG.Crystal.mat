@@ -30,7 +30,8 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -55,27 +56,27 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 2
     - _BlendModePreserveSpecular: 1
-    - _Bottom_Line: 0.568
+    - _Bottom_Line: 0.636
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _Metallic: 0.796
+    - _Metallic: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.796
+    - _Smoothness: 0.544
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _Top_Line: 0.5
+    - _Top_Line: 0.598
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
     - _Base_Color: {r: 0.14666653, g: 0, b: 1, a: 1}
-    - _Bottom_Color: {r: 1.4980391, g: 0.28971505, b: 0.8986807, a: 1}
-    - _Top_Color: {r: 0, g: 1.4980394, b: 1.4451674, a: 1}
+    - _Bottom_Color: {r: 3.3207545, g: 0, b: 1.6819408, a: 1}
+    - _Top_Color: {r: 0, g: 1.6792455, b: 1.6264944, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
