@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 082d7b111422f4362bd7421f1341d5c4, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -367,13 +367,65 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: InitialModule.startRotation.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inSlope
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405061651573078519, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4839179829211994351, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.82788
       objectReference: {fileID: 0}
     - target: {fileID: 4839179829211994351, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 12.82
       objectReference: {fileID: 0}
     - target: {fileID: 4839179829211994351, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -413,8 +465,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6351128341355627372, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6810833969464584119, guid: b8e2980fbc61c4579a3bc13d329ce10b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 34d437e50f995421c9cc9936b606d694, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
