@@ -76,12 +76,12 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _Bottom_Color: {r: 0, g: 1, b: 0.25933123, a: 1}
+    - _Bottom_Color: {r: 0, g: 0.16065669, b: 1, a: 1}
     - _Dissolve_Speed: {r: 0, g: 1.65, b: 0, a: 0}
-    - _Emission_Control: {r: 0.7062958, g: 0.7062958, b: 0.7062958, a: 1}
+    - _Emission_Control: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
     - _Main_Texture_Tiling: {r: 1, g: -1.17, b: 0, a: 0}
     - _Mask_Speed: {r: 0, g: -0.98, b: 0, a: 0}
     - _Mask_Texture_Tiling: {r: -5, g: 1, b: 0, a: 0}
-    - _Top_Color: {r: 5.992157, g: 0.949565, b: 0, a: 1}
+    - _Top_Color: {r: 0, g: 2.9808078, b: 2.9960785, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

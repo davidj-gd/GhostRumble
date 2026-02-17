@@ -42,6 +42,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Distortion_Scale: 30
     - _Distortion_Strength: 0.1
     - _Noise_Scale: 85.16
     - _Noise_Step: 0.05
@@ -49,7 +50,8 @@ Material:
     - _QueueOffset: 0
     - _ScrollSpeed: 0.3
     - _Twirl_Strength: 20
-    m_Colors: []
+    m_Colors:
+    - _ColorBloom_Controll: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &8657571474981483224
