@@ -170,14 +170,14 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 5b04d1ec8805b47dab98d163c0a3c515, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 242196001cecc42a2b40c288e0c4c857, type: 2}
+      objectReference: {fileID: 2100000, guid: 3cd00acc84559459abe5cd986e964cd1, type: 2}
     - target: {fileID: 919132149155446097, guid: 5b04d1ec8805b47dab98d163c0a3c515, type: 3}
       propertyPath: m_Name
       value: Bracelet.FX.Cone
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5b04d1ec8805b47dab98d163c0a3c515, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14869,7 +14869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5b04d1ec8805b47dab98d163c0a3c515, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

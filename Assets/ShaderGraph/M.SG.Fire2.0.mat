@@ -17,7 +17,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2450
   stringTagMap:
     RenderType: TransparentCutout
   disabledShaderPasses:
@@ -44,13 +44,13 @@ Material:
     - _AlphaToMask: 1
     - _Blend: 0
     - _CastShadows: 1
-    - _Cull: 2
-    - _Dissolve: 0
+    - _Cull: 0
+    - _Dissolve: 0.803
     - _Distortion_Scale: 30
     - _Distortion_Strength: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _Mask_Power: 0.727
+    - _Mask_Power: 0.596
     - _Noise_Power_1_Default: 1
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -63,12 +63,12 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _Base_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Base_Color: {r: 0.7490196, g: 0, b: 0, a: 0}
     - _Distortion_Scroll_Speed: {r: -0.5, g: -1, b: 0, a: 0}
     - _Distortion_Tiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Radial_Shear_Offset: {r: 0, g: 0.5, b: 0, a: 0}
+    - _Radial_Shear_Offset: {r: 0, g: -0.5, b: 0, a: 0}
     - _Radial_Shear_Strength: {r: 0, g: 0, b: 0, a: 0}
-    - _Twirl_Center_No_Need_To_Touch_This: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Twirl_Center_No_Need_To_Touch_This: {r: 0.5, g: -0.5, b: 0, a: 0}
     - _Twirl_Offset: {r: 0, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
