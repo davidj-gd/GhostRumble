@@ -61,10 +61,12 @@ Material:
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 1
     - _Cull: 2
+    - _Distortion_Scale: 30
+    - _Distortion_Strength: 0
     - _DstBlend: 10
     - _DstBlendAlpha: 10
     - _Metallic: 0
-    - _Noise_Scale: 6.4
+    - _Noise_Scale: 15.6
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -72,13 +74,14 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 1
-    - _Twirl_Strength: 10.36
-    - _Voronoi_Scale: 2
+    - _Twirl_Strength: 7.63
+    - _Voronoi_Scale: 3.36
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Emission_Control: {r: 0.59439826, g: 0, b: 3.031433, a: 1}
+    - _Distortion_Scroll_Speed: {r: -0.09, g: -0.1, b: 0, a: 0}
+    - _Emission_Control: {r: 0.15533853, g: 0, b: 0.41509432, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
