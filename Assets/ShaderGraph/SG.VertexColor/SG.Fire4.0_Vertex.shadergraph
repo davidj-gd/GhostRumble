@@ -5306,7 +5306,7 @@
     "m_ObjectId": "ab30d6b881e2411c94cd1354cd3eb593",
     "m_Title": "Mask",
     "m_Position": {
-        "x": -3715.999755859375,
+        "x": -3716.0,
         "y": 737.0
     }
 }
@@ -5508,7 +5508,7 @@
     "m_Title": "Noise_Radial Shear",
     "m_Position": {
         "x": -4110.0,
-        "y": 90.9997787475586
+        "y": 91.0
     }
 }
 
