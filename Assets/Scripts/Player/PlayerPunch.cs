@@ -7,6 +7,8 @@ public class PlayerPunch : MonoBehaviour
     [Header("Punch References")]
     [SerializeField] private PunchProjectile punchProjectile;
 
+    [SerializeField] Animator animator;
+
     private void Awake()
     {
         if (punchProjectile == null)
@@ -19,7 +21,12 @@ public class PlayerPunch : MonoBehaviour
     {
         if (context.performed)
         {
+            animator.SetTrigger("Punch");
             punchProjectile.ThrowPunch();
+        }
+        else
+        {
+            return;
         }
     }
 }

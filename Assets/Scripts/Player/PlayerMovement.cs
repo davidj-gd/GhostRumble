@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float linearDrag = 3f;
 
     [Header("Aim Settings")]
-    [SerializeField] float rotationSpeed = 3f;
+    [SerializeField] float rotationSpeed = 100f;
     private Vector2 aimValue;
 
     Transform lookAtTarget;
@@ -20,13 +20,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] CinemachineCamera camera;
     [SerializeField] Camera cam;
 
-
     Vector2 moveInput;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.linearDamping = linearDrag;
+
+        if (cam == null)
+            cam = Camera.main;
 
         if (lookAtTarget == null)
         {
@@ -44,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         HandleMovement(moveInput);
-        
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -77,9 +78,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleRotation()
     {
-        if (camera == null) return;
+        if (cam == null) return;
 
-        Vector3 screenPosition = new Vector3(aimValue.x * Screen.width, aimValue.y * Screen.height, 0f);
+        // Aim action is bound to Mouse.position (screen pixels)
+        Vector3 screenPosition = new Vector3(aimValue.x, aimValue.y, 0f);
 
         Ray raycast = cam.ScreenPointToRay(screenPosition);
         float playerHeight = transform.position.y;
@@ -93,13 +95,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (direction.sqrMagnitude < 0.001f) return;
         direction.Normalize();
-        transform.rotation = Quaternion.LookRotation(direction);
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        float maxDegrees = rotationSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxDegrees);
     }
 
     public void OnAim(InputAction.CallbackContext context)
     {
-
         aimValue = context.ReadValue<Vector2>();
-
     }
 }
