@@ -72,16 +72,16 @@ Material:
     - _SrcBlend: 5
     - _SrcBlendAlpha: 1
     - _Surface: 1
-    - _Voronoi_Dissolve_Scale: 13.1
+    - _Voronoi_Dissolve_Scale: 13
     - _Voronoi_Noise_Toggle: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
     - _Bottom_Color: {r: 0, g: 0.06282711, b: 1, a: 1}
-    - _Dissolve_Speed: {r: 0, g: -0.16, b: 0, a: 0}
+    - _Dissolve_Speed: {r: 0, g: -0.51, b: 0, a: 0}
     - _Emission_Control: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
-    - _Main_Texture_Tiling: {r: 1.8, g: 0.36, b: 0, a: 0}
+    - _Main_Texture_Tiling: {r: 1.8, g: 0.34, b: 0, a: 0}
     - _Mask_Speed: {r: 0, g: -1.1, b: 0, a: 0}
     - _Mask_Texture_Tiling: {r: 5.63, g: 1, b: 0, a: 0}
     - _Top_Color: {r: 0, g: 2.6905966, b: 2.9960787, a: 1}
