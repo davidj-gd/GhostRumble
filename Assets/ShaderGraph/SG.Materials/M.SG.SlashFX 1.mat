@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8062249042088290781
+--- !u!114 &-2716374820830409142
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,31 +20,25 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M.SG.Trail
-  m_Shader: {fileID: -6465566751694194690, guid: 0210fb19781b64a5489eeb2c1d8dc1f9, type: 3}
+  m_Name: M.SG.SlashFX 1
+  m_Shader: {fileID: -6465566751694194690, guid: 856ead6c566f945b1bfb7a398dfd000f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHATEST_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Texture:
-        m_Texture: {fileID: 2800000, guid: 411adbec8496f40468e7421cf8c6102a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture2DAsset_5ef6ddf1e2e34fc486deb9078285d5a5_Out_0_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 411adbec8496f40468e7421cf8c6102a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -59,21 +53,35 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dissolve_Amount: 1
-    - _Gradient_Strength: 2.16
-    - _Mask_Clamp: 2
-    - _Mask_Power: 1
-    - _Mask_Threshold: 5
-    - _Noise_Dissolve_Scale: 100
-    - _Noise_Voronoi: 1
+    - _AlphaClip: 1
+    - _AlphaToMask: 1
+    - _Blend: 0
+    - _CastShadows: 1
+    - _Cull: 0
+    - _DstBlend: 0
+    - _DstBlendAlpha: 0
+    - _Main_Mask_Power: 0.585
+    - _Mask_Scale: 50
+    - _Mask_Toggle: 0
+    - _Noise_Dissolve_Scale: 26.15
+    - _Noise_Voronoi_Mask_Toggle: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
+    - _Surface: 0
+    - _Voronoi_Dissolve_Scale: 4.2
+    - _Voronoi_Noise_Toggle: 1
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
-    - _Base_Color: {r: 0, g: 0.9237287, b: 1, a: 0}
-    - _Color: {r: 0, g: 0.5488052, b: 0.5943396, a: 1}
-    - _Noise_Dissolve_Speed: {r: -0.5, g: 0, b: 0, a: 0}
-    - _Tail_Color: {r: 0.44654655, g: 0, b: 1, a: 0}
-    - _Texture_Speed: {r: -0.2, g: 0, b: 0, a: 0}
-    - _Texture_Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Bottom_Color: {r: 0, g: 0.38829803, b: 1, a: 0}
+    - _Dissolve_Speed: {r: 0, g: -1.49, b: 0, a: 0}
+    - _Emission_Control: {r: 1, g: 1, b: 1, a: 1}
+    - _Main_Texture_Tiling: {r: 4.96, g: 1, b: 0, a: 0}
+    - _Mask_Speed: {r: 0, g: -0.5, b: 0, a: 0}
+    - _Mask_Texture_Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Top_Color: {r: 0.05361234, g: 0, b: 0.1792453, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
