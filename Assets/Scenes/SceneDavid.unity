@@ -301,6 +301,47 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 884fe9ee19221784c8d3a457d906afef, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1 &857792456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9074953440982146316, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+  m_PrefabInstance: {fileID: 4132135376554231177}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &857792459 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5336765500067054126, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+  m_PrefabInstance: {fileID: 4132135376554231177}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857792456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b3fbfa5c662024eaa619b2e9e620fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PunchProjectile
+--- !u!114 &857792464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857792456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4670715df1583fd459bb7a85598189b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RegisterHit
+  punchProjectile: {fileID: 857792459}
+  hitVfx: {fileID: 8381161782993815881, guid: 6e0ff12f27b98af4097edfa1aebaf6c5, type: 3}
+--- !u!114 &857792467 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6981656129222504223, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+  m_PrefabInstance: {fileID: 4132135376554231177}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857792456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702bb0717bdb9c047b9bc21b5bfacb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
 --- !u!114 &1627759841 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8124260268360322737, guid: 6643bbd7a238edc4f9cc964442db98f2, type: 3}
@@ -748,6 +789,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 3714364182303110085, guid: 6643bbd7a238edc4f9cc964442db98f2, type: 3}
+      propertyPath: Damping
+      value: 3.13
+      objectReference: {fileID: 0}
     - target: {fileID: 5079639800168191537, guid: 6643bbd7a238edc4f9cc964442db98f2, type: 3}
       propertyPath: Targets.Array.data[0].Object
       value: 
@@ -756,6 +801,18 @@ PrefabInstance:
       propertyPath: Targets.Array.data[1].Object
       value: 
       objectReference: {fileID: 1888884564}
+    - target: {fileID: 5144579751321954351, guid: 6643bbd7a238edc4f9cc964442db98f2, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144579751321954351, guid: 6643bbd7a238edc4f9cc964442db98f2, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144579751321954351, guid: 6643bbd7a238edc4f9cc964442db98f2, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5457837890254879765, guid: 6643bbd7a238edc4f9cc964442db98f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.24797
@@ -796,6 +853,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6727783494397178925, guid: 6643bbd7a238edc4f9cc964442db98f2, type: 3}
+      propertyPath: Damping.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727783494397178925, guid: 6643bbd7a238edc4f9cc964442db98f2, type: 3}
+      propertyPath: Damping.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -817,6 +882,46 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: ec5d95e60114e4fc39244d1f0c8d10b7, type: 2}
+    - target: {fileID: 1302065301601958221, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302065301601958221, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionId
+      value: b0f64414-a421-4067-be3e-7530d8dfe533
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302065301601958221, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionName
+      value: 'Player/Dash[/Keyboard/shift]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302065301601958221, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302065301601958221, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302065301601958221, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 857792467}
+    - target: {fileID: 1302065301601958221, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302065301601958221, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnDash
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302065301601958221, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerMovement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302065301601958221, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3569550181934937615, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -863,12 +968,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4941770740203099930, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.822
+      value: 1.061
       objectReference: {fileID: 0}
     - target: {fileID: 5336765500067054126, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: punchPrefab
       value: 
       objectReference: {fileID: 4415730675636365313, guid: 237f8a2fb7c5fe4449e14eaa3b4afcce, type: 3}
+    - target: {fileID: 5336765500067054126, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: registerHit
+      value: 
+      objectReference: {fileID: 857792464}
+    - target: {fileID: 5336765500067054126, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: damageAmount
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6072226215614113953, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -881,6 +994,30 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 1627759841}
+    - target: {fileID: 6981656129222504223, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: dashSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981656129222504223, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: dashCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981656129222504223, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: leanSmoothSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981656129222504223, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: dashControlLockout
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981656129222504223, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: maxLeanRollDegrees
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981656129222504223, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: maxLeanPitchDegrees
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 9074953440982146316, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_Name
       value: Player
@@ -888,7 +1025,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9074953440982146316, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 857792464}
   m_SourcePrefab: {fileID: 100100000, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
 --- !u!1001 &5705047472855299731
 PrefabInstance:
