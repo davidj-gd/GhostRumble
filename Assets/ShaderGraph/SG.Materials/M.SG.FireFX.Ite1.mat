@@ -84,6 +84,6 @@ Material:
     - _Main_Texture_Tiling: {r: 1.8, g: 0.34, b: 0, a: 0}
     - _Mask_Speed: {r: 0, g: -1.1, b: 0, a: 0}
     - _Mask_Texture_Tiling: {r: 5.63, g: 1, b: 0, a: 0}
-    - _Top_Color: {r: 0, g: 2.6905966, b: 2.9960787, a: 1}
+    - _Top_Color: {r: 0, g: 1.3452983, b: 1.4980394, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
