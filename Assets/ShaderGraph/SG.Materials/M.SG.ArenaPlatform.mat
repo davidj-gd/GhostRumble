@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M.SG.ArenaPlatform
+  m_Shader: {fileID: -6465566751694194690, guid: 0ac8ead97a652450d8cb618339e3fdfa, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Noise_Distortion_Noise_Scale: 30
+    - _Noise_Power: 5
+    - _Noise_Scale: 250
+    - _Noise_Shear_Strength: 2.5
+    - _Noise_Smoothstep_Max: 0.82
+    - _Noise_Smoothstep_Min: 0
+    - _Noise_TaO_Radial_Shear: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Voronoi_AngleOffset: 18.4
+    - _Voronoi_Distortion_Noise_Scale: 12.6
+    - _Voronoi_Power: 5
+    - _Voronoi_Scale: 100
+    - _Voronoi_Smoothstep_Max: 1
+    - _Voronoi_Smoothstep_Min: 0
+    - _Voronoi_TaO_Twirl: 0
+    - _Voronoi_Twirl_Strength: 4.14
+    m_Colors:
+    - _Noise_Color: {r: 0.06666667, g: 0, b: 0.02075189, a: 1}
+    - _Noise_Distortion_Speed: {r: 0, g: 0, b: 0, a: 0}
+    - _Noise_Shear_Speed: {r: 0.05, g: 0.05, b: 0, a: 0}
+    - _Voronoi_Color: {r: 0.5764706, g: 0, b: 0.48429066, a: 0}
+    - _Voronoi_Distortion_Speed: {r: 0, g: 0, b: 0, a: 0}
+    - _Voronoi_Twirl_Speed: {r: -0, g: 0.03, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!114 &953079452948752587
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
+  version: 10
