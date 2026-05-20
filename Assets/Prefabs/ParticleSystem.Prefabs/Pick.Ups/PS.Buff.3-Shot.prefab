@@ -9684,7 +9684,7 @@ GameObject:
   - component: {fileID: 7852725881914087539}
   - component: {fileID: 8627638240126592924}
   m_Layer: 0
-  m_Name: PS.3-Shot
+  m_Name: PS.Buff.3-Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

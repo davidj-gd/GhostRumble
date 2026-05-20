@@ -33,7 +33,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: 
+  m_LockedProperties: _Noise_Dissolve_Speed
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -60,19 +60,20 @@ Material:
     m_Ints: []
     m_Floats:
     - _Dissolve_Amount: 1
-    - _Gradient_Strength: 2.16
+    - _Gradient_Strength: 0
     - _Mask_Clamp: 2
     - _Mask_Power: 1
     - _Mask_Threshold: 5
     - _Noise_Dissolve_Scale: 100
     - _Noise_Voronoi: 1
+    - _Noise_Voronoi_Dissolve: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Base_Color: {r: 0, g: 0.32304835, b: 0.3490566, a: 0}
+    - _Base_Color: {r: 0, g: 0.92134833, b: 1, a: 0}
     - _Color: {r: 0, g: 0.5488052, b: 0.5943396, a: 1}
     - _Noise_Dissolve_Speed: {r: -0.5, g: 0, b: 0, a: 0}
-    - _Tail_Color: {r: 0.11362215, g: 0.022427911, b: 0.2264151, a: 0}
+    - _Tail_Color: {r: 0.44230747, g: 0, b: 1, a: 0}
     - _Texture_Speed: {r: -0.2, g: 0, b: 0, a: 0}
     - _Texture_Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
