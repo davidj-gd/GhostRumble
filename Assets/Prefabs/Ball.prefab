@@ -135,7 +135,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7ad2bef0ab6ee4067a7a7edcd746cd8e, type: 2}
+  - {fileID: 2100000, guid: 66a9b80bdb99645289d37f5e0311d9b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -169,12 +169,21 @@ TrailRenderer:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: -2.0084796
+        outSlope: -2.0084796
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.15076923
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -3.4130216
+        outSlope: -3.4130216
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.17538464
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -229,15 +238,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 21.31
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 21.31
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 21.31
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -253,7 +262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_LocalRotation.x
@@ -261,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_LocalRotation.z
@@ -273,7 +282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -281,16 +290,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: f0729c5a8428f43e6aab2ef5c69d60f1, type: 2}
+      objectReference: {fileID: 2100000, guid: 4788a39d0a2b14020b93807b3656c4c7, type: 2}
     - target: {fileID: -5754084199372789682, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4320920774596158507, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
+      objectReference: {fileID: 3447038591770236762, guid: 37fe2f8053def4e94b973bd1a46ae23d, type: 3}
     - target: {fileID: 919132149155446097, guid: 41de3afd69ff167408cd7f6606e787a2, type: 3}
       propertyPath: m_Name
       value: CrystalBall 1
