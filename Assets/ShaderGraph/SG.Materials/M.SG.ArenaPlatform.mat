@@ -47,19 +47,19 @@ Material:
     - _Noise_TaO_Radial_Shear: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Voronoi_AngleOffset: 18.4
+    - _Voronoi_AngleOffset: 20
     - _Voronoi_Distortion_Noise_Scale: 12.6
     - _Voronoi_Power: 5
-    - _Voronoi_Scale: 100
+    - _Voronoi_Scale: 267.5
     - _Voronoi_Smoothstep_Max: 1
     - _Voronoi_Smoothstep_Min: 0
     - _Voronoi_TaO_Twirl: 0
-    - _Voronoi_Twirl_Strength: 4.14
+    - _Voronoi_Twirl_Strength: 0.08
     m_Colors:
-    - _Noise_Color: {r: 0.06666667, g: 0, b: 0.02075189, a: 1}
+    - _Noise_Color: {r: 0, g: 0.016771555, b: 1, a: 1}
     - _Noise_Distortion_Speed: {r: 0, g: 0, b: 0, a: 0}
     - _Noise_Shear_Speed: {r: 0.05, g: 0.05, b: 0, a: 0}
-    - _Voronoi_Color: {r: 0.5764706, g: 0, b: 0.48429066, a: 0}
+    - _Voronoi_Color: {r: 1, g: 0, b: 0.9224782, a: 0}
     - _Voronoi_Distortion_Speed: {r: 0, g: 0, b: 0, a: 0}
     - _Voronoi_Twirl_Speed: {r: -0, g: 0.03, b: 0, a: 0}
   m_BuildTextureStacks: []
