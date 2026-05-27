@@ -1259,7 +1259,7 @@
     "m_ObjectId": "14f98d1792ab4ff98c7e3585215abf81",
     "m_Title": "UV1 and up is not working",
     "m_Position": {
-        "x": -2588.0,
+        "x": -2588.000244140625,
         "y": 469.0
     }
 }
@@ -2727,7 +2727,7 @@
     "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
     "m_ObjectId": "510e0772d6484a80aa43c56f81250e47",
     "m_Title": "Neighboring Node",
-    "m_Content": "Extra Multiply makes it more prominent\n\nVertex Color for Niagara to controll color\n",
+    "m_Content": "Extra Multiply makes it more prominent\n\nVertex Color for Shuriken to controll color\n",
     "m_TextSize": 0,
     "m_Theme": 0,
     "m_Position": {
@@ -4758,10 +4758,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -447.0,
-            "y": 106.0,
-            "width": 120.0,
-            "height": 148.99998474121095
+            "x": -288.00006103515627,
+            "y": 111.00000762939453,
+            "width": 120.00006103515625,
+            "height": 149.0
         }
     },
     "m_Slots": [
@@ -4815,8 +4815,8 @@
     "m_ObjectId": "c33dda85601b4fe4939db4091f371689",
     "m_Title": "Distortion",
     "m_Position": {
-        "x": -4432.0,
-        "y": -866.0
+        "x": -4432.0009765625,
+        "y": -866.0001220703125
     }
 }
 

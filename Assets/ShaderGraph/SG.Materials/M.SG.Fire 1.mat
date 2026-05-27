@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2363012613451639996
+--- !u!114 &-6971977567460058540
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M.SG.CelShading
-  m_Shader: {fileID: -6465566751694194690, guid: 1f84695b781a94a48bab6d528d36dd1f, type: 3}
+  m_Name: M.SG.Fire 1
+  m_Shader: {fileID: -6465566751694194690, guid: 86c9ce8577c054b86a9f39efd6b3a127, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -37,6 +37,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: 411adbec8496f40468e7421cf8c6102a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -51,13 +55,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Color_Masking_Power: 0
-    - _Lighting_Cutoff: -0.02
+    - _FlameHeight: 14.9
+    - _Noise_Scale: 5
+    - _Noise_Speed: -0.5
+    - _Noise_Volume: 0.75
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Shadow_Brightness: 0
+    - _Voronoi_CutoutSmoothness: 0.75
+    - _Voronoi_Scale: 10
+    - _Voronoi_Speed: -0.5
     m_Colors:
-    - _Bottom_Color: {r: 0.01418649, g: 0, b: 0.2924528, a: 0}
-    - _Top_Color: {r: 0, g: 1, b: 0.9608457, a: 0}
+    - _Inner_Glow: {r: 0, g: 1.1031706, b: 1.4980394, a: 1}
+    - _Mask_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Mask_Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Noise_Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Outer_Glow: {r: 0.109445535, g: 0, b: 0.7264151, a: 1}
+    - _Voronoi_Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

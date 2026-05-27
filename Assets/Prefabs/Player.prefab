@@ -440,6 +440,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2fd15996-5694-4b1a-ba1d-b5f2943bf579
     m_ActionName: 'Player/Aim[/Mouse/position]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b0f64414-a421-4067-be3e-7530d8dfe533
+    m_ActionName: 'Player/Dash[/Keyboard/shift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -509,7 +513,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 6
   linearDrag: 0.1
+  dashSpeed: 18
+  dashCooldown: 0.7
+  dashControlLockout: 0.12
+  dashMomentumBlendSpeed: 48
   rotationSpeed: 350
+  maxLeanPitchDegrees: 6
+  maxLeanRollDegrees: 8
+  leanSmoothSpeed: 12
   camera: {fileID: 0}
   cam: {fileID: 0}
 --- !u!114 &5336765500067054126
@@ -530,6 +541,8 @@ MonoBehaviour:
   punchSpawnPoint: {fileID: 4941770740203099930}
   projectileLifetime: 2
   damageAmount: 0
+  punchIsThrown: 0
+  registerHit: {fileID: 0}
 --- !u!114 &1695945619261682935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPunch
   punchProjectile: {fileID: 5336765500067054126}
   animator: {fileID: 1710645638355451918}
+  punchCooldown: 0.4
 --- !u!95 &1710645638355451918
 Animator:
   serializedVersion: 7
@@ -633,11 +647,11 @@ PrefabInstance:
     - target: {fileID: -4522641082611103279, guid: 9f03a904303bec0439b0b49bb0559248, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: e7f5909de6504429c959d96c4700a856, type: 2}
+      objectReference: {fileID: 2100000, guid: ec5d95e60114e4fc39244d1f0c8d10b7, type: 2}
     - target: {fileID: -4522641082611103279, guid: 9f03a904303bec0439b0b49bb0559248, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: e7f5909de6504429c959d96c4700a856, type: 2}
+      objectReference: {fileID: 2100000, guid: ec5d95e60114e4fc39244d1f0c8d10b7, type: 2}
     - target: {fileID: 919132149155446097, guid: 9f03a904303bec0439b0b49bb0559248, type: 3}
       propertyPath: m_Name
       value: Ghost_punch

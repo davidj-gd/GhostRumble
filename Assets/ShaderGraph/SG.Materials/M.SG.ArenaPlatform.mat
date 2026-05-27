@@ -38,6 +38,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Metallic: 0
     - _Noise_Distortion_Noise_Scale: 30
     - _Noise_Power: 5
     - _Noise_Scale: 250
@@ -47,6 +48,7 @@ Material:
     - _Noise_TaO_Radial_Shear: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Smoothness: 0
     - _Voronoi_AngleOffset: 20
     - _Voronoi_Distortion_Noise_Scale: 12.6
     - _Voronoi_Power: 5
