@@ -5507,8 +5507,8 @@
     "m_ObjectId": "3f4f556b38b540b3babd6378e1561082",
     "m_Title": "No movement in Red Vertex Color",
     "m_Position": {
-        "x": 8687.068359375,
-        "y": -2014.5396728515625
+        "x": 8687.0,
+        "y": -2015.0
     }
 }
 
@@ -9315,8 +9315,8 @@
     "m_ObjectId": "7fc5a7816608402688d89c57fb6ef5c4",
     "m_Title": "Add Y movement to base Vertex Position",
     "m_Position": {
-        "x": 9493.0009765625,
-        "y": -2305.000244140625
+        "x": 9493.0,
+        "y": -2305.0
     }
 }
 
