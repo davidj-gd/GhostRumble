@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4000208266928529232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8759872979842331057}
+  - component: {fileID: 868224855702175569}
+  m_Layer: 0
+  m_Name: HUD Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8759872979842331057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000208266928529232}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.35558, y: -0, z: -1.48329}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &868224855702175569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000208266928529232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2447804eb4e4bc797c552a696bc528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GhostHUD
+  player1Health: {fileID: 0}
+  player1Movement: {fileID: 0}
+  player2Health: {fileID: 0}
+  player2Movement: {fileID: 0}
+  p1BarColor: {r: 0.15, g: 0.85, b: 0.95, a: 1}
+  p2BarColor: {r: 0.95, g: 0.2, b: 0.5, a: 1}
+  barTrackColor: {r: 0.04, g: 0.04, b: 0.08, a: 0.92}
+  panelBgColor: {r: 0.02, g: 0.02, b: 0.06, a: 0.78}
+  damageFlashColor: {r: 1, g: 0.1, b: 0.1, a: 0.7}
+  flashDuration: 0.2
+  barWidth: 36
+  barHeight: 200
+  barInnerPad: 3
+  dashFullColor: {r: 0.98, g: 0.88, b: 0.25, a: 1}
+  dashEmptyColor: {r: 0.12, g: 0.12, b: 0.18, a: 1}
+  dashRechargeColor: {r: 0.7, g: 0.55, b: 0.1, a: 1}
+  pipWidth: 14
+  pipHeightFraction: 0.28
+  pipGap: 5
+  panelPad: 10
+  elementGap: 6
+  screenEdge: 20
+  labelSize: 14
+  liquidSpeed: 6
