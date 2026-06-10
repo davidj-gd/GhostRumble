@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M.SG.CartoonFire_MaskTester
+  m_Name: M.SG.CartoonFire_MaskTester 1
   m_Shader: {fileID: -6465566751694194690, guid: e2e955c81a3814ea397208edda930021, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Mask:
-        m_Texture: {fileID: 2800000, guid: c9da5a7aab52c4ff79a1cf3605a36e2a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5b1b12561ffe54fbb90eff5aed36b94c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -51,7 +51,7 @@ Material:
     - _ScrollSpeed: 0.27
     - _Twirl_Strength: 0.78
     m_Colors:
-    - _ColorBloom_Controll: {r: 0, g: 0.8305149, b: 1, a: 1}
+    - _ColorBloom_Controll: {r: 0, g: 1.6627445, b: 2, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &8657571474981483224

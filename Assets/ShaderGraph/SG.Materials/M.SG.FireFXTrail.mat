@@ -58,10 +58,10 @@ Material:
     - _DstBlendAlpha: 10
     - _Gradient_Strength: 0.87
     - _Height: 0.2
-    - _Main_Mask_Power: 0.582
+    - _Main_Mask_Power: 1
     - _Mask_Scale: 10
     - _Mask_Toggle: 0
-    - _Noise_Dissolve_Scale: 150.2
+    - _Noise_Dissolve_Scale: 79.4
     - _Noise_Voronoi_Mask_Toggle: 0
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -70,13 +70,13 @@ Material:
     - _Surface: 1
     - _Tiling_Twirl_Toggle: 0
     - _Voronoi_Dissolve_Scale: 20.75
-    - _Voronoi_Noise_Toggle: 0
+    - _Voronoi_Noise_Toggle: 1
     - _Width: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Bottom_Color: {r: 0.043583393, g: 0, b: 1, a: 1}
+    - _Bottom_Color: {r: 0, g: 0.10802809, b: 0.3773585, a: 1}
     - _Dissolve_Speed: {r: -0.5, g: 0, b: 0, a: 0}
     - _Distortion_Noise_Speed: {r: -0.5, g: 0, b: 0, a: 0}
     - _Distortion_Noise_Tiling: {r: 1, g: 1, b: 0, a: 0}
@@ -86,7 +86,7 @@ Material:
     - _Mask_Texture_Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _Texture_Speed: {r: -0.57, g: 0, b: 0, a: 0}
     - _Texture_Tiling: {r: 0.33, g: 1, b: 0, a: 0}
-    - _Top_Color: {r: 1, g: 0, b: 0.37465715, a: 1}
+    - _Top_Color: {r: 0, g: 1, b: 0.96346426, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &7502406683998144555

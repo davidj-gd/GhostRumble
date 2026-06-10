@@ -26,15 +26,17 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHATEST_ON
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: 3000
   stringTagMap:
-    RenderType: TransparentCutout
+    RenderType: Transparent
   disabledShaderPasses:
   - MOTIONVECTORS
+  - DepthOnly
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -54,34 +56,34 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 1
-    - _AlphaToMask: 1
+    - _AlphaToMask: 0
     - _Blend: 0
     - _CastShadows: 1
-    - _Cull: 0
-    - _DstBlend: 0
-    - _DstBlendAlpha: 0
-    - _Main_Mask_Power: 0.585
-    - _Mask_Scale: 50
-    - _Mask_Toggle: 0
-    - _Noise_Dissolve_Scale: 26.15
+    - _Cull: 2
+    - _DstBlend: 10
+    - _DstBlendAlpha: 10
+    - _Main_Mask_Power: 0.77
+    - _Mask_Scale: 100
+    - _Mask_Toggle: 1
+    - _Noise_Dissolve_Scale: 30
     - _Noise_Voronoi_Mask_Toggle: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _SrcBlendAlpha: 1
-    - _Surface: 0
-    - _Voronoi_Dissolve_Scale: 4.2
+    - _Surface: 1
+    - _Voronoi_Dissolve_Scale: 1.8
     - _Voronoi_Noise_Toggle: 1
     - _ZTest: 4
-    - _ZWrite: 1
+    - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Bottom_Color: {r: 0, g: 0.38823533, b: 1, a: 0}
-    - _Dissolve_Speed: {r: 0, g: -1.49, b: 0, a: 0}
-    - _Emission_Control: {r: 1.1486983, g: 1.1486983, b: 1.1486983, a: 1}
-    - _Main_Texture_Tiling: {r: 4.96, g: 1, b: 0, a: 0}
+    - _Bottom_Color: {r: 0, g: 0.4832785, b: 1, a: 0}
+    - _Dissolve_Speed: {r: 0, g: 0, b: 0, a: 0}
+    - _Emission_Control: {r: 1, g: 1, b: 1, a: 1}
+    - _Main_Texture_Tiling: {r: 5, g: 1, b: 0, a: 0}
     - _Mask_Speed: {r: 0, g: -0.5, b: 0, a: 0}
     - _Mask_Texture_Tiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Top_Color: {r: 0.057424143, g: 0, b: 0.18867922, a: 0}
+    - _Top_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

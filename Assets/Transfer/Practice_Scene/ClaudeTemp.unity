@@ -496,6 +496,10 @@ PrefabInstance:
       propertyPath: orbitTarget
       value: 
       objectReference: {fileID: 3184051043365267688}
+    - target: {fileID: 2756623800641997310, guid: 47e646f7774b64bd7a3d25905c859067, type: 3}
+      propertyPath: dashVFXPrefab
+      value: 
+      objectReference: {fileID: 4901172530571708763, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

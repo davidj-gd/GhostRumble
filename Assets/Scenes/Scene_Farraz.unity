@@ -17692,6 +17692,133 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934908503}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &944787382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 944787385}
+  - component: {fileID: 944787383}
+  - component: {fileID: 944787384}
+  m_Layer: 0
+  m_Name: Lamp.DashWing Shine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!108 &944787383
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944787382}
+  m_Enabled: 1
+  serializedVersion: 12
+  m_Type: 2
+  m_Color: {r: 0, g: 0.8384061, b: 1, a: 1}
+  m_Intensity: 13.73
+  m_Range: 0.8
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize2D: {x: 0.5, y: 0.5}
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 2
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 1e-45, y: 0, z: 0, w: 1.5196234e-30}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
+--- !u!114 &944787384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944787382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
+--- !u!4 &944787385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944787382}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.15012828, y: -0, z: -0, w: 0.98866653}
+  m_LocalPosition: {x: 0, y: 0.11301, z: 0.13648}
+  m_LocalScale: {x: 0.76135, y: 0.7613499, z: 0.7613499}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1001 &952534484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54968,19 +55095,19 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ec5d95e60114e4fc39244d1f0c8d10b7, type: 2}
     - target: {fileID: 3569550181934937615, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.0020393496
       objectReference: {fileID: 0}
     - target: {fileID: 3569550181934937615, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3569550181934937615, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.79
+      value: -0.502
       objectReference: {fileID: 0}
     - target: {fileID: 3569550181934937615, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3569550181934937615, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalRotation.x
@@ -54988,7 +55115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3569550181934937615, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3569550181934937615, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalRotation.z
@@ -55000,7 +55127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3569550181934937615, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 3569550181934937615, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -55064,7 +55191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9074953440982146316, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -61097,12 +61224,12 @@ GameObject:
   - component: {fileID: 2133296961}
   - component: {fileID: 2133296960}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: PS.DashFire (Cartoony:exoeriment)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &2133296960
 ParticleSystemRenderer:
   serializedVersion: 7
@@ -66646,6 +66773,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc76d2951ac384d45bd46d5c8f276242, type: 3}
+--- !u!1001 &7260182659236746999
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1826796801248370097, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826796801248370097, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.11301
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826796801248370097, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.13648
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826796801248370097, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.98866653
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826796801248370097, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.15012828
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826796801248370097, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826796801248370097, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826796801248370097, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 17.269
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826796801248370097, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826796801248370097, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300231687320376668, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: m_Name
+      value: PS.DashWings Main
+      objectReference: {fileID: 0}
+    - target: {fileID: 4901172530571708763, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      propertyPath: LightsModule.light
+      value: 
+      objectReference: {fileID: 944787383}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
 --- !u!1001 &7702566704747997103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66745,4 +66933,6 @@ SceneRoots:
   - {fileID: 5302299857091505616}
   - {fileID: 198323376}
   - {fileID: 551915893}
+  - {fileID: 944787385}
   - {fileID: 2133296962}
+  - {fileID: 7260182659236746999}
