@@ -1,9 +1,16 @@
 using UnityEngine;
-using System.Collections;
 
 /// <summary>
-/// GhostMovement — WASD ice-physics + Q/E orbital + Shift dash (3 stacks).
-/// Exposes dash stack state so the HUD can read it.
+/// GhostMovement — WASD ice-physics + Q/E orbital + hold-Shift boost dash.
+///
+/// DASH BEHAVIOUR:
+///   • Hold Shift to dash — increases movement speed / orbital spin speed.
+///   • Dash gauge drains while Shift is held, refills while released.
+///   • Gauge can be reused as soon as any fuel is available (no cooldown).
+///   • During WASD: raises maxSpeed cap and adds extra forward force.
+///   • During Q/E orbit: multiplies the orbital tangential force, making
+///     the spin faster. Radial correction still holds the radius.
+///   • HUD reads: DashGauge (0-1), IsDashing.
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class GhostMovement : MonoBehaviour
@@ -12,8 +19,8 @@ public class GhostMovement : MonoBehaviour
     [Header("WASD Movement")]
     public float moveForce  = 22f;
     public float maxSpeed   = 9f;
-    [Range(0f,5f)] public float idleDrag   = 1.2f;
-    [Range(0f,2f)] public float movingDrag = 0.05f;
+    [Range(0f, 5f)] public float idleDrag   = 1.2f;
+    [Range(0f, 2f)] public float movingDrag = 0.05f;
 
     // ── Tilt ───────────────────────────────────────────────────────────────
     [Header("Tilt")]
@@ -25,38 +32,54 @@ public class GhostMovement : MonoBehaviour
     public Transform orbitTarget;
     public float     orbitForce = 28f;
 
-    [Tooltip("How strongly the player is pulled/pushed radially while orbiting.\n" +
-             "0  = locked radius (perfect circle)\n" +
-             "> 0 = orbit gradually moves outward (spiral out)\n" +
-             "< 0 = orbit gradually moves inward (spiral in)")]
+    [Tooltip("0 = locked radius. + = spiral out. - = spiral in.")]
     [Range(-20f, 20f)]
     public float orbitRadialDrift = 0f;
 
-    [Tooltip("How hard the radius correction force pulls the player back to the locked orbit distance. " +
-             "Higher = tighter circle. Lower = looser/driftier arc.")]
+    [Tooltip("Spring strength keeping player on the orbit radius.")]
     public float orbitRadiusStiffness = 18f;
 
     // ── Dash ───────────────────────────────────────────────────────────────
-    [Header("Dash (Shift)")]
-    public float dashForce    = 18f;
-    public float dashCooldown = 1f;     // seconds to regain one stack
-    public int   maxDashStacks = 3;
+    [Header("Dash (Hold Shift)")]
 
-    [Tooltip("Empty GameObject on the character where the dash VFX spawns.")]
+    [Tooltip("Extra force added on top of moveForce while dashing during WASD.")]
+    public float dashExtraForce = 20f;
+
+    [Tooltip("How much higher the speed cap goes while dashing.")]
+    public float dashSpeedBonus = 6f;
+
+    [Tooltip("Multiplier applied to orbitForce while dashing during Q/E rotation. " +
+             "e.g. 2.0 = twice as fast spin.")]
+    public float dashOrbitMultiplier = 2.2f;
+
+    [Tooltip("Seconds to drain the gauge from full to empty while holding Shift.")]
+    public float dashDrainTime   = 2.5f;
+
+    [Tooltip("Seconds to refill the gauge from empty to full while not dashing.")]
+    public float dashRefillTime  = 3.5f;
+
+    [Tooltip("Minimum gauge needed to START dashing (prevents flickering near 0).")]
+    [Range(0f, 0.3f)]
+    public float dashMinToStart  = 0.05f;
+
+    [Header("Dash VFX")]
+    [Tooltip("Empty child GameObject on the character. Place your particle system here.")]
     public Transform      dashVFXPoint;
     public ParticleSystem dashVFXPrefab;
 
-    // ── public read (for HUD) ──────────────────────────────────────────────
-    public int   DashStacks      { get; private set; }
-    /// 0‒1 fill of the stack currently recharging (0 = just used, 1 = full)
-    public float RechargeProgress { get; private set; } = 1f;
+    // ── Public state (read by GhostHUD) ───────────────────────────────────
+    /// Gauge level 0 (empty) → 1 (full)
+    public float DashGauge  { get; private set; } = 1f;
+    /// True while Shift is held AND gauge is above zero
+    public bool  IsDashing  { get; private set; }
 
-    // ── private ────────────────────────────────────────────────────────────
+    // ── Private ────────────────────────────────────────────────────────────
     Rigidbody rb;
     Vector3   inputDir;
     bool      isOrbiting;
-    float     rechargeTimer;
-    float     lockedOrbitRadius = -1f;  // captured when Q/E first pressed
+    float     lockedOrbitRadius = -1f;
+    bool            vfxPlaying;
+    ParticleSystem  activeDashVFX;   // live prefab instance while dashing
 
     void Awake()
     {
@@ -66,23 +89,26 @@ public class GhostMovement : MonoBehaviour
                        | RigidbodyConstraints.FreezeRotationX
                        | RigidbodyConstraints.FreezeRotationZ;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
-        DashStacks = maxDashStacks;
     }
 
     void Update()
     {
-        // ── Recharge ───────────────────────────────────────────────────────
-        if (DashStacks < maxDashStacks)
+        // ── Dash gauge ─────────────────────────────────────────────────────
+        bool shiftHeld = Input.GetKey(KeyCode.LeftShift);
+
+        if (shiftHeld && DashGauge >= dashMinToStart)
         {
-            rechargeTimer += Time.deltaTime;
-            RechargeProgress = Mathf.Clamp01(rechargeTimer / dashCooldown);
-            if (rechargeTimer >= dashCooldown)
-            {
-                DashStacks++;
-                rechargeTimer = 0f;
-                RechargeProgress = DashStacks < maxDashStacks ? 0f : 1f;
-            }
+            IsDashing   = true;
+            DashGauge   = Mathf.Max(0f, DashGauge - Time.deltaTime / dashDrainTime);
+            if (DashGauge <= 0f) IsDashing = false; // ran out mid-hold
         }
+        else
+        {
+            IsDashing = false;
+            DashGauge = Mathf.Min(1f, DashGauge + Time.deltaTime / dashRefillTime);
+        }
+
+        HandleDashVFX();
 
         // ── Q/E orbit ──────────────────────────────────────────────────────
         bool q = Input.GetKey(KeyCode.Q);
@@ -91,88 +117,47 @@ public class GhostMovement : MonoBehaviour
 
         if (isOrbiting)
         {
-            // Capture radius the first frame Q/E is pressed
             if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
             {
                 Vector3 toPlayer = transform.position - orbitTarget.position;
                 toPlayer.y = 0f;
                 lockedOrbitRadius = toPlayer.magnitude;
             }
-
             ApplyOrbitalForce(q ? 1f : -1f);
             rb.linearDamping = movingDrag;
             inputDir = Vector3.zero;
         }
         else
         {
-            lockedOrbitRadius = -1f;  // reset so next press re-captures cleanly
+            lockedOrbitRadius = -1f;
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
             inputDir = new Vector3(h, 0f, v).normalized;
             rb.linearDamping = inputDir.sqrMagnitude > 0f ? movingDrag : idleDrag;
         }
-
-        // ── Dash ───────────────────────────────────────────────────────────
-        if (Input.GetKeyDown(KeyCode.LeftShift) && DashStacks > 0)
-            StartCoroutine(Dash());
     }
 
     void FixedUpdate()
     {
         if (!isOrbiting && inputDir.sqrMagnitude > 0f)
-            rb.AddForce(inputDir * moveForce, ForceMode.Force);
-
-        Vector3 flat = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        if (flat.magnitude > maxSpeed)
         {
-            Vector3 capped = flat.normalized * maxSpeed;
+            float force = IsDashing ? moveForce + dashExtraForce : moveForce;
+            rb.AddForce(inputDir * force, ForceMode.Force);
+        }
+
+        // Speed cap — raised while dashing
+        float cap = IsDashing ? maxSpeed + dashSpeedBonus : maxSpeed;
+        Vector3 flat = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        if (flat.magnitude > cap)
+        {
+            Vector3 capped = flat.normalized * cap;
             rb.linearVelocity = new Vector3(capped.x, rb.linearVelocity.y, capped.z);
         }
 
         TiltTowardVelocity();
     }
 
-    IEnumerator Dash()
-    {
-        DashStacks--;
-        if (DashStacks < maxDashStacks - 1 == false) // first stack used
-            rechargeTimer = 0f;
-        // Always reset timer when a stack is consumed so recharge starts fresh
-        rechargeTimer = 0f;
-        RechargeProgress = 0f;
-
-        Vector3 dashDir = inputDir.sqrMagnitude > 0.01f
-            ? inputDir
-            : new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z).normalized;
-        if (dashDir.sqrMagnitude < 0.01f)
-            dashDir = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized;
-
-        Vector3 currentFlat = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        float opposing = Mathf.Min(Vector3.Dot(currentFlat, dashDir), 0f);
-        Vector3 corrected = currentFlat - dashDir * opposing;
-        rb.linearVelocity = new Vector3(corrected.x, rb.linearVelocity.y, corrected.z);
-        rb.AddForce(dashDir * dashForce, ForceMode.Impulse);
-
-        PlayDashVFX();
-        yield return null; // coroutine kept for future use (e.g. dash frames, invincibility)
-    }
-
-    void PlayDashVFX()
-    {
-        if (dashVFXPoint == null) return;
-        if (dashVFXPrefab != null)
-        {
-            ParticleSystem fx = Instantiate(dashVFXPrefab, dashVFXPoint.position, dashVFXPoint.rotation);
-            fx.Play();
-            Destroy(fx.gameObject, fx.main.duration + fx.main.startLifetime.constantMax + 0.5f);
-        }
-        else
-        {
-            ParticleSystem ex = dashVFXPoint.GetComponentInChildren<ParticleSystem>();
-            if (ex != null) { ex.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear); ex.Play(); }
-        }
-    }
-
+    // ── Orbital ────────────────────────────────────────────────────────────
     void ApplyOrbitalForce(float direction)
     {
         if (orbitTarget == null) return;
@@ -184,31 +169,68 @@ public class GhostMovement : MonoBehaviour
         float   currentRadius = toPlayer.magnitude;
         Vector3 radialDir     = toPlayer.normalized;
 
-        // ── Tangential force (slides the player around the circle) ─────────
         Vector3 tangent = direction > 0f
             ? new Vector3( toPlayer.z, 0f, -toPlayer.x).normalized
             : new Vector3(-toPlayer.z, 0f,  toPlayer.x).normalized;
-        rb.AddForce(tangent * orbitForce, ForceMode.Force);
 
-        // ── Radial correction (keeps the radius locked) ────────────────────
-        // orbitRadialDrift == 0  → force pulls player exactly back to locked radius
-        // orbitRadialDrift  > 0  → target radius grows  → player drifts outward
-        // orbitRadialDrift  < 0  → target radius shrinks → player drifts inward
+        // Dash multiplies the spin force — starts orbiting faster immediately
+        float appliedForce = IsDashing ? orbitForce * dashOrbitMultiplier : orbitForce;
+        rb.AddForce(tangent * appliedForce, ForceMode.Force);
+
         if (lockedOrbitRadius > 0f)
         {
             float targetRadius = lockedOrbitRadius + orbitRadialDrift * Time.deltaTime;
-            lockedOrbitRadius  = targetRadius;   // accumulate drift over time
-
-            float radiusError  = currentRadius - targetRadius;   // +ve = too far, -ve = too close
-            // Apply inward force proportional to how far off the target radius we are
+            lockedOrbitRadius  = targetRadius;
+            float radiusError  = currentRadius - targetRadius;
             rb.AddForce(-radialDir * radiusError * orbitRadiusStiffness, ForceMode.Force);
         }
     }
 
+    // ── Dash VFX ───────────────────────────────────────────────────────────
+    void HandleDashVFX()
+    {
+        if (dashVFXPoint == null) return;
+
+        if (dashVFXPrefab != null)
+        {
+            // Spawn once on dash start, keep the reference, stop it on dash end
+            if (IsDashing && !vfxPlaying)
+            {
+                vfxPlaying    = true;
+                activeDashVFX = Instantiate(dashVFXPrefab, dashVFXPoint.position, dashVFXPoint.rotation);
+                activeDashVFX.transform.SetParent(dashVFXPoint); // follows the character
+                activeDashVFX.Play();
+            }
+            else if (!IsDashing && vfxPlaying)
+            {
+                vfxPlaying = false;
+                if (activeDashVFX != null)
+                {
+                    activeDashVFX.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+                    // Destroy after particles finish fading out
+                    float fadeTime = activeDashVFX.main.startLifetime.constantMax + 0.2f;
+                    Destroy(activeDashVFX.gameObject, fadeTime);
+                    activeDashVFX = null;
+                }
+            }
+        }
+        else
+        {
+            // Child PS already on the character — just Play/Stop it directly
+            ParticleSystem ex = dashVFXPoint.GetComponentInChildren<ParticleSystem>();
+            if (ex == null) return;
+            if (IsDashing && !ex.isPlaying)
+                ex.Play();
+            else if (!IsDashing && ex.isPlaying)
+                ex.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+        }
+    }
+
+    // ── Tilt ───────────────────────────────────────────────────────────────
     void TiltTowardVelocity()
     {
         Vector3 flat      = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        float   speedFrac = Mathf.Clamp01(flat.magnitude / maxSpeed);
+        float   speedFrac = Mathf.Clamp01(flat.magnitude / (maxSpeed + dashSpeedBonus));
         Quaternion targetRot = flat.sqrMagnitude > 0.01f
             ? Quaternion.AngleAxis(maxTiltAngle * speedFrac, Vector3.Cross(Vector3.up, flat.normalized))
             : Quaternion.identity;

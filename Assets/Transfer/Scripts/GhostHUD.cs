@@ -72,8 +72,8 @@ public class GhostHUD : MonoBehaviour
         public Image   panel;
         public Image   hpFill;        // the liquid fill rect
         public Image   hpTrack;
-        public Image[] dashBgs;
-        public Image[] dashFills;
+        public Image   dashFill;      // single gauge fill
+        public Image   dashBg;        // gauge background
         public float   targetFill;    // 0-1
         public float   currentFill;
     }
@@ -86,13 +86,13 @@ public class GhostHUD : MonoBehaviour
     {
         BuildCanvas();
 
-        p1MaxHP   = player1Health   != null ? player1Health.maxHP          : 25;
-        p2MaxHP   = player2Health   != null ? player2Health.maxHP          : 25;
-        p1DashMax = player1Movement != null ? player1Movement.maxDashStacks : 3;
-        p2DashMax = player2Movement != null ? player2Movement.maxDashStacks : 3;
+        p1MaxHP   = player1Health != null ? player1Health.maxHP : 25;
+        p2MaxHP   = player2Health != null ? player2Health.maxHP : 25;
+        p1DashMax = 1; // unused but kept to avoid removing field
+        p2DashMax = 1;
 
-        BuildPanel(true,  ref p1, p1MaxHP, p1DashMax, p1BarColor);
-        BuildPanel(false, ref p2, p2MaxHP, p2DashMax, p2BarColor);
+        BuildPanel(true,  ref p1, p1MaxHP, p1BarColor);
+        BuildPanel(false, ref p2, p2MaxHP, p2BarColor);
 
         p1.targetFill = p1.currentFill = 1f;
         p2.targetFill = p2.currentFill = 1f;
@@ -116,8 +116,8 @@ public class GhostHUD : MonoBehaviour
     {
         AnimateLiquid(ref p1);
         AnimateLiquid(ref p2);
-        UpdateDash(ref p1, player1Movement, p1DashMax);
-        UpdateDash(ref p2, player2Movement, p2DashMax);
+        UpdateDashGauge(ref p1, player1Movement);
+        UpdateDashGauge(ref p2, player2Movement);
     }
 
     // ── Liquid lerp ────────────────────────────────────────────────────────
@@ -131,44 +131,25 @@ public class GhostHUD : MonoBehaviour
         rt.offsetMin = rt.offsetMax = Vector2.zero;
     }
 
-    // ── Dash pips ──────────────────────────────────────────────────────────
-    void UpdateDash(ref PlayerHUD h, GhostMovement mv, int maxDash)
+    // ── Dash gauge ─────────────────────────────────────────────────────────
+    void UpdateDashGauge(ref PlayerHUD h, GhostMovement mv)
     {
         if (mv == null) return;
-        int   stacks   = mv.DashStacks;
-        float progress = mv.RechargeProgress;
 
-        for (int i = 0; i < maxDash; i++)
-        {
-            // Pips drawn bottom-to-top: i=0 is bottom
-            if (i < stacks)
-            {
-                h.dashBgs[i].color       = dashFullColor;
-                h.dashFills[i].fillAmount = 1f;
-                h.dashFills[i].color      = dashFullColor;
-            }
-            else if (i == stacks)
-            {
-                h.dashBgs[i].color        = dashEmptyColor;
-                h.dashFills[i].fillAmount  = progress;
-                h.dashFills[i].color       = dashRechargeColor;
-            }
-            else
-            {
-                h.dashBgs[i].color        = dashEmptyColor;
-                h.dashFills[i].fillAmount  = 0f;
-            }
-        }
+        float gauge     = mv.DashGauge;   // 0-1
+        bool  dashing   = mv.IsDashing;
+
+        h.dashFill.fillAmount = gauge;
+        h.dashFill.color      = dashing ? dashFullColor : dashRechargeColor;
+        h.dashBg.color        = dashEmptyColor;
     }
 
     // ── Panel builder ──────────────────────────────────────────────────────
-    void BuildPanel(bool isLeft, ref PlayerHUD h, int maxHP, int maxDash, Color barColor)
+    void BuildPanel(bool isLeft, ref PlayerHUD h, int maxHP, Color barColor)
     {
-        // Panel size: contains HP bar + gap + dash column, plus padding all round
-        float pipH      = (barHeight - (maxDash - 1) * pipGap) * pipHeightFraction;
-        float totalPipH = maxDash * pipH + (maxDash - 1) * pipGap;
-        float panelW    = panelPad * 2 + barWidth + elementGap + pipWidth;
-        float panelH    = panelPad * 2 + barHeight + labelSize + 8f;
+        // Panel size: HP bar + gap + single dash gauge bar, plus padding
+        float panelW = panelPad * 2 + barWidth + elementGap + pipWidth;
+        float panelH = panelPad * 2 + barHeight + labelSize + 8f;
 
         // ── Panel background ───────────────────────────────────────────────
         GameObject panelGO = NewImage("Panel", canvas.transform, panelBgColor);
@@ -226,50 +207,35 @@ public class GhostHUD : MonoBehaviour
 
         // (shine overlay removed — caused visual artefacts on both bars)
 
-        // ── Dash pips column ───────────────────────────────────────────────
-        // All pips use anchor/pivot (0,1) — top-left corner of panel — for both sides.
-        // P1: dash column RIGHT of HP bar  →  dashColX = panelPad + barWidth + elementGap
-        // P2: dash column LEFT  of HP bar  →  dashColX = panelPad
-        //     (HP track was placed with right-anchor so it sits on the right automatically)
+        // ── Dash gauge (single vertical bar beside HP) ─────────────────────
+        // Same X logic as before: right of HP for P1, left of HP for P2
         float dashColX = isLeft
             ? panelPad + barWidth + elementGap
             : panelPad;
+        float dashTopY = -(panelPad + labelSize + 6f);
 
-        float dashColTopY = -(panelPad + labelSize + 6f);
+        // Background
+        GameObject dashBgGO = NewImage("Dash_BG", panelGO.transform, dashEmptyColor);
+        h.dashBg = dashBgGO.GetComponent<Image>();
+        RectTransform dbr = dashBgGO.GetComponent<RectTransform>();
+        dbr.anchorMin = dbr.anchorMax = new Vector2(0f, 1f);
+        dbr.pivot     = new Vector2(0f, 1f);
+        dbr.sizeDelta = new Vector2(pipWidth, barHeight);
+        dbr.anchoredPosition = new Vector2(dashColX, dashTopY);
 
-        h.dashBgs   = new Image[maxDash];
-        h.dashFills = new Image[maxDash];
-
-        float usableH  = barHeight;
-        float eachPipH = (usableH - (maxDash - 1) * pipGap) / maxDash;
-
-        for (int i = 0; i < maxDash; i++)
-        {
-            float yOffset = dashColTopY - i * (eachPipH + pipGap);
-
-            GameObject pipBG = NewImage("Dash_BG_" + i, panelGO.transform, dashEmptyColor);
-            RectTransform pbr = pipBG.GetComponent<RectTransform>();
-            // Consistent left-anchor for both players — no mirroring confusion
-            pbr.anchorMin = pbr.anchorMax = new Vector2(0f, 1f);
-            pbr.pivot     = new Vector2(0f, 1f);
-            pbr.sizeDelta = new Vector2(pipWidth, eachPipH);
-            pbr.anchoredPosition = new Vector2(dashColX, yOffset);
-            h.dashBgs[i] = pipBG.GetComponent<Image>();
-
-            // Pip fill (vertical, bottom-to-top)
-            GameObject pipFill = NewImage("Dash_Fill_" + i, pipBG.transform, dashFullColor);
-            RectTransform pfr = pipFill.GetComponent<RectTransform>();
-            pfr.anchorMin = new Vector2(0f, 0f);
-            pfr.anchorMax = new Vector2(1f, 1f);
-            pfr.offsetMin = new Vector2(2f, 2f);
-            pfr.offsetMax = new Vector2(-2f, -2f);
-            Image fillImg = pipFill.GetComponent<Image>();
-            fillImg.type        = Image.Type.Filled;
-            fillImg.fillMethod  = Image.FillMethod.Vertical;
-            fillImg.fillOrigin  = (int)Image.OriginVertical.Bottom;
-            fillImg.fillAmount  = 1f;
-            h.dashFills[i] = fillImg;
-        }
+        // Fill — vertical, bottom to top
+        GameObject dashFillGO = NewImage("Dash_Fill", dashBgGO.transform, dashFullColor);
+        RectTransform dfr = dashFillGO.GetComponent<RectTransform>();
+        dfr.anchorMin = new Vector2(0f, 0f);
+        dfr.anchorMax = new Vector2(1f, 1f);
+        dfr.offsetMin = new Vector2(2f, 2f);
+        dfr.offsetMax = new Vector2(-2f, -2f);
+        Image dashFillImg = dashFillGO.GetComponent<Image>();
+        dashFillImg.type        = Image.Type.Filled;
+        dashFillImg.fillMethod  = Image.FillMethod.Vertical;
+        dashFillImg.fillOrigin  = (int)Image.OriginVertical.Bottom;
+        dashFillImg.fillAmount  = 1f;
+        h.dashFill = dashFillImg;
     }
 
     // ── Flash coroutine ────────────────────────────────────────────────────
