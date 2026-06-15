@@ -263,9 +263,11 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4415730675636365313, guid: 237f8a2fb7c5fe4449e14eaa3b4afcce, type: 3}
   shootOrigin: {fileID: 246170377}
   hitVFXPrefab: {fileID: 8381161782993815881, guid: 6e0ff12f27b98af4097edfa1aebaf6c5, type: 3}
+  playerTarget: {fileID: 7384871606829832196}
   hitsToIntermediate: 5
   hitsToHard: 12
   beginnerBulletCount: 4
+  beginnerFanSpread: 60
   beginnerBulletSpeed: 6
   beginnerFireInterval: 1.8
   intermediateBulletCount: 8
@@ -356,67 +358,6 @@ Transform:
   - {fileID: 246170377}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &870947581
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.263
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.522
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3.872
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 1b4c8fb8515474289af7eef3732a5f18, type: 2}
-    - target: {fileID: 919132149155446097, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
-      propertyPath: m_Name
-      value: Dash.Beam
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e9b8ff95b1a14d249196c87d497e81b, type: 3}
 --- !u!1 &1948186274 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8915303719349271639, guid: 7a2bef82af5054fb78db7ce0765c9594, type: 3}
@@ -797,7 +738,7 @@ PrefabInstance:
     - target: {fileID: 2756623800641997310, guid: 47e646f7774b64bd7a3d25905c859067, type: 3}
       propertyPath: dashVFXPrefab
       value: 
-      objectReference: {fileID: 4901172530571708763, guid: 37c4d306eb73e42dfac23e4fc220d636, type: 3}
+      objectReference: {fileID: 8834978408343452390, guid: e1ef72297e5a64cdbba51dc28e0d86f2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -813,4 +754,3 @@ SceneRoots:
   - {fileID: 8208178087889993039}
   - {fileID: 5941106492527998968}
   - {fileID: 746389552}
-  - {fileID: 870947581}

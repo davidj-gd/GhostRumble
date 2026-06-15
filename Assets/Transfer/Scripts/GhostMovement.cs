@@ -63,9 +63,14 @@ public class GhostMovement : MonoBehaviour
     public float dashMinToStart  = 0.05f;
 
     [Header("Dash VFX")]
-    [Tooltip("Empty child GameObject on the character. Place your particle system here.")]
-    public Transform      dashVFXPoint;
-    public ParticleSystem dashVFXPrefab;
+    [Tooltip("The spawn point child transform on the character (empty GO). Place it where you want the effect to appear.")]
+    public Transform  dashVFXPoint;
+
+    [Tooltip("Prefab to show while dashing. Can be a ParticleSystem prefab OR any mesh/GameObject prefab.\n\n" +
+             "• ParticleSystem prefab — played on dash start, stopped on dash end (with natural fade-out).\n" +
+             "• Mesh / any other prefab — instantiated on dash start, destroyed instantly on dash end.\n" +
+             "• Leave empty — the script will look for a ParticleSystem already sitting under dashVFXPoint.")]
+    public GameObject dashVFXPrefab;
 
     // ── Public state (read by GhostHUD) ───────────────────────────────────
     /// Gauge level 0 (empty) → 1 (full)
@@ -79,7 +84,8 @@ public class GhostMovement : MonoBehaviour
     bool      isOrbiting;
     float     lockedOrbitRadius = -1f;
     bool            vfxPlaying;
-    ParticleSystem  activeDashVFX;   // live prefab instance while dashing
+    GameObject      activeDashVFXInstance;  // live instance while dashing
+    ParticleSystem  activeDashVFXPS;        // cached PS on the instance, if any
 
     void Awake()
     {
@@ -187,36 +193,71 @@ public class GhostMovement : MonoBehaviour
     }
 
     // ── Dash VFX ───────────────────────────────────────────────────────────
+    //
+    //  Three cases, evaluated in order:
+    //
+    //  1. dashVFXPrefab is assigned + contains a ParticleSystem
+    //     → Instantiate on dash start, Stop (with fade) on dash end.
+    //
+    //  2. dashVFXPrefab is assigned + NO ParticleSystem (mesh / generic GO)
+    //     → Instantiate on dash start, Destroy immediately on dash end.
+    //
+    //  3. dashVFXPrefab is null
+    //     → Look for a ParticleSystem already childed under dashVFXPoint
+    //       and Play/Stop it directly (original behaviour).
+    //
     void HandleDashVFX()
     {
         if (dashVFXPoint == null) return;
 
         if (dashVFXPrefab != null)
         {
-            // Spawn once on dash start, keep the reference, stop it on dash end
             if (IsDashing && !vfxPlaying)
             {
-                vfxPlaying    = true;
-                activeDashVFX = Instantiate(dashVFXPrefab, dashVFXPoint.position, dashVFXPoint.rotation);
-                activeDashVFX.transform.SetParent(dashVFXPoint); // follows the character
-                activeDashVFX.Play();
+                // ── Spawn the prefab ──────────────────────────────────────
+                vfxPlaying            = true;
+                activeDashVFXInstance = Instantiate(dashVFXPrefab,
+                                                    dashVFXPoint.position,
+                                                    dashVFXPoint.rotation);
+                activeDashVFXInstance.transform.SetParent(dashVFXPoint);
+
+                // Cache a ParticleSystem if one exists on the prefab.
+                activeDashVFXPS = activeDashVFXInstance.GetComponent<ParticleSystem>();
+                if (activeDashVFXPS == null)
+                    activeDashVFXPS = activeDashVFXInstance.GetComponentInChildren<ParticleSystem>();
+
+                // Play if it's a particle system.
+                if (activeDashVFXPS != null)
+                    activeDashVFXPS.Play();
             }
             else if (!IsDashing && vfxPlaying)
             {
+                // ── Remove the prefab instance ────────────────────────────
                 vfxPlaying = false;
-                if (activeDashVFX != null)
+
+                if (activeDashVFXInstance != null)
                 {
-                    activeDashVFX.Stop(false, ParticleSystemStopBehavior.StopEmitting);
-                    // Destroy after particles finish fading out
-                    float fadeTime = activeDashVFX.main.startLifetime.constantMax + 0.2f;
-                    Destroy(activeDashVFX.gameObject, fadeTime);
-                    activeDashVFX = null;
+                    if (activeDashVFXPS != null)
+                    {
+                        // Particle system — stop emitting and let particles fade.
+                        activeDashVFXPS.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+                        float fadeTime = activeDashVFXPS.main.startLifetime.constantMax + 0.2f;
+                        Destroy(activeDashVFXInstance, fadeTime);
+                    }
+                    else
+                    {
+                        // Mesh / generic prefab — destroy immediately.
+                        Destroy(activeDashVFXInstance);
+                    }
+
+                    activeDashVFXInstance = null;
+                    activeDashVFXPS       = null;
                 }
             }
         }
         else
         {
-            // Child PS already on the character — just Play/Stop it directly
+            // ── No prefab assigned: drive a child PS directly ─────────────
             ParticleSystem ex = dashVFXPoint.GetComponentInChildren<ParticleSystem>();
             if (ex == null) return;
             if (IsDashing && !ex.isPlaying)

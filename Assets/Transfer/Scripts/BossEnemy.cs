@@ -34,6 +34,9 @@ public class BossEnemy : MonoBehaviour
     [Tooltip("Optional particle effect spawned when this enemy is hit.")]
     public GameObject hitVFXPrefab;
 
+    [Tooltip("The player transform the fan pattern aims at. Assign Player 1 here.")]
+    public Transform playerTarget;
+
     // ------------------------------------------------------------------ //
     //  Inspector — Hit Thresholds
     // ------------------------------------------------------------------ //
@@ -50,8 +53,11 @@ public class BossEnemy : MonoBehaviour
     // ------------------------------------------------------------------ //
 
     [Header("Beginner Phase")]
-    [Tooltip("Bullets fired per burst volley.")]
-    public int beginnerBulletCount = 4;
+    [Tooltip("Number of bullets in the fan spread toward the player.")]
+    public int beginnerBulletCount = 5;
+
+    [Tooltip("Total angle of the fan spread in degrees. 60 = wide, 30 = tight.")]
+    public float beginnerFanSpread = 60f;
 
     [Tooltip("Speed of each bullet (units/s).")]
     public float beginnerBulletSpeed = 6f;
@@ -232,15 +238,16 @@ public class BossEnemy : MonoBehaviour
     }
 
     // ------------------------------------------------------------------ //
-    //  BEGINNER — simple equal-angle burst on the XZ plane
+    //  BEGINNER — 5-bullet fan spread aimed at the player
     // ------------------------------------------------------------------ //
     //
-    //  Pattern:  4 bullets at 0°, 90°, 180°, 270°
-    //            (evenly spread outward from the boss)
+    //  Pattern:  5 bullets fanning out toward the player's current position.
+    //            The centre bullet aims directly at the player; the outer
+    //            two bullets are spread by beginnerFanSpread/2 on each side.
     //
     private IEnumerator BeginnerAttack()
     {
-        FireRadialBurst(beginnerBulletCount, beginnerBulletSpeed, 0f);
+        FireFanBurst(beginnerBulletCount, beginnerBulletSpeed, beginnerFanSpread);
         yield return null;
     }
 
@@ -300,6 +307,46 @@ public class BossEnemy : MonoBehaviour
     // ------------------------------------------------------------------ //
 
     /// <summary>
+    /// Fires <count> bullets in a fan spread aimed at the player.
+    /// The centre bullet points directly at playerTarget; the remaining
+    /// bullets are distributed evenly across totalSpreadDegrees.
+    /// Falls back to a forward-facing fan if playerTarget is not assigned.
+    /// </summary>
+    private void FireFanBurst(int count, float speed, float totalSpreadDegrees)
+    {
+        // Aim the centre of the fan at the player.
+        Vector3 toPlayer;
+        if (playerTarget != null)
+        {
+            toPlayer = playerTarget.position - shootOrigin.position;
+            toPlayer.y = 0f;
+            if (toPlayer.sqrMagnitude < 0.001f)
+                toPlayer = transform.forward;
+            toPlayer.Normalize();
+        }
+        else
+        {
+            toPlayer = transform.forward;
+            Debug.LogWarning("[BossEnemy] playerTarget not assigned — fan aims forward.");
+        }
+
+        // Convert the centre direction to an angle on the XZ plane.
+        float centreAngle = Mathf.Atan2(toPlayer.z, toPlayer.x) * Mathf.Rad2Deg;
+
+        // Spread bullets evenly across the fan.
+        float halfSpread = totalSpreadDegrees * 0.5f;
+        float step       = (count > 1) ? totalSpreadDegrees / (count - 1) : 0f;
+
+        for (int i = 0; i < count; i++)
+        {
+            float offset    = (count > 1) ? -halfSpread + (i * step) : 0f;
+            float angleDeg  = centreAngle + offset;
+            Vector3 dir     = AngleToXZDirection(angleDeg);
+            SpawnBullet(shootOrigin.position, dir, speed);
+        }
+    }
+
+    /// <summary>
     /// Fires <count> bullets equally spaced around 360° on the XZ plane,
     /// all travelling outward from the boss.
     /// <offsetDegrees> rotates the whole pattern.
@@ -355,7 +402,12 @@ public class BossEnemy : MonoBehaviour
         direction.y = 0f;
         direction.Normalize();
 
-        GameObject bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
+        // Rotate bullet to face its travel direction.
+        Quaternion bulletRotation = direction != Vector3.zero
+            ? Quaternion.LookRotation(direction, Vector3.up)
+            : Quaternion.identity;
+
+        GameObject bullet = Instantiate(bulletPrefab, position, bulletRotation);
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb == null)
@@ -401,37 +453,55 @@ public class BossEnemy : MonoBehaviour
     {
         if (shootOrigin == null) return;
 
-        // Draw current phase pattern preview.
-        int   count    = beginnerBulletCount;
-        float step     = 360f / count;
-        float offset   = 0f;
-
 #if UNITY_EDITOR
         Phase phase = Application.isPlaying ? CurrentPhase() : Phase.Beginner;
 
         switch (phase)
         {
-            case Phase.Intermediate:
-                count  = intermediateBulletCount;
-                Gizmos.color = Color.yellow;
-                break;
-            case Phase.Hard:
-                count  = hardBulletCount;
-                offset = _rotationAccumulator;
-                Gizmos.color = Color.red;
-                break;
-            default:
+            case Phase.Beginner:
+            {
                 Gizmos.color = Color.cyan;
+                // Draw fan aimed at player (or forward if not assigned).
+                Vector3 toPlayer = (playerTarget != null)
+                    ? (playerTarget.position - shootOrigin.position)
+                    : transform.forward;
+                toPlayer.y = 0f;
+                if (toPlayer.sqrMagnitude > 0.001f) toPlayer.Normalize();
+                float centreAngle = Mathf.Atan2(toPlayer.z, toPlayer.x) * Mathf.Rad2Deg;
+                float halfSpread  = beginnerFanSpread * 0.5f;
+                float step        = (beginnerBulletCount > 1)
+                    ? beginnerFanSpread / (beginnerBulletCount - 1) : 0f;
+                for (int i = 0; i < beginnerBulletCount; i++)
+                {
+                    float offset   = (beginnerBulletCount > 1) ? -halfSpread + (i * step) : 0f;
+                    Vector3 dir    = AngleToXZDirection(centreAngle + offset);
+                    Gizmos.DrawRay(shootOrigin.position, dir * 2f);
+                }
                 break;
+            }
+            case Phase.Intermediate:
+            {
+                Gizmos.color = Color.yellow;
+                float step = 360f / intermediateBulletCount;
+                for (int i = 0; i < intermediateBulletCount; i++)
+                {
+                    Vector3 dir = AngleToXZDirection(i * step);
+                    Gizmos.DrawRay(shootOrigin.position, dir * 2f);
+                }
+                break;
+            }
+            case Phase.Hard:
+            {
+                Gizmos.color = Color.red;
+                float step = 360f / hardBulletCount;
+                for (int i = 0; i < hardBulletCount; i++)
+                {
+                    Vector3 dir = AngleToXZDirection((i * step) + _rotationAccumulator);
+                    Gizmos.DrawRay(shootOrigin.position, dir * 2f);
+                }
+                break;
+            }
         }
 #endif
-
-        step = 360f / count;
-        for (int i = 0; i < count; i++)
-        {
-            float   angleDeg = (i * step) + offset;
-            Vector3 dir      = AngleToXZDirection(angleDeg);
-            Gizmos.DrawRay(shootOrigin.position, dir * 2f);
-        }
     }
 }
