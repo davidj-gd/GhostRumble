@@ -31,6 +31,10 @@ public class GhostProjectile : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
+        
+        BossEnemy boss = col.gameObject.GetComponent<BossEnemy>();
+        if (boss != null) boss.RegisterHit();
+
         if (hasHit) return;
         hasHit = true;
 
