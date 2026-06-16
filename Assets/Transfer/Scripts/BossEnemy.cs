@@ -133,6 +133,31 @@ public class BossEnemy : MonoBehaviour
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
+        else
+        {
+            // Boss needs a Rigidbody for OnCollisionEnter to fire.
+            rb = gameObject.AddComponent<Rigidbody>();
+            rb.useGravity  = false;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            Debug.Log("[BossEnemy] Rigidbody added automatically.");
+        }
+
+        // Ensure a non-trigger collider exists for OnCollisionEnter.
+        // Also add a slightly larger trigger collider as a fallback catch-all.
+        Collider existing = GetComponent<Collider>();
+        if (existing == null)
+        {
+            SphereCollider sc = gameObject.AddComponent<SphereCollider>();
+            sc.radius = 1f;
+            sc.isTrigger = false;
+            Debug.Log("[BossEnemy] SphereCollider (non-trigger, r=1) added automatically.");
+        }
+
+        // Add a trigger collider one size larger as a belt-and-suspenders fallback.
+        // This catches cases where the player bullet passes through on fast shots.
+        SphereCollider trigger = gameObject.AddComponent<SphereCollider>();
+        trigger.radius    = (existing != null) ? 1.2f : 1.2f;
+        trigger.isTrigger = true;
 
         if (shootOrigin == null)
             shootOrigin = transform;
@@ -165,32 +190,46 @@ public class BossEnemy : MonoBehaviour
     }
 
     // ------------------------------------------------------------------ //
-    //  Collision — detect player bullets hitting the boss directly
+    //  Collision & Trigger — detect player bullets hitting the boss
     // ------------------------------------------------------------------ //
     //
-    //  This means you do NOT need to patch GhostProjectile.cs at all.
-    //  The boss detects the hit itself when a Ball collider touches it.
-    //  GhostProjectile.cs still handles damage to the player as normal.
+    //  Both OnCollisionEnter (non-trigger collider) and OnTriggerEnter
+    //  (trigger collider) are handled. Whichever fires first wins.
+    //  A frame-based guard (_hitRegisteredThisFrame) prevents a single
+    //  bullet from counting twice if it touches both colliders at once.
     //
+    private int _lastHitFrame = -1;
+
     private void OnCollisionEnter(Collision col)
     {
-        // Ignore our own bullets hitting us.
-        // (Physics.IgnoreCollision handles this already, but belt-and-suspenders.)
-        if (col.gameObject == gameObject) return;
+        TryRegisterHit(col.gameObject);
+    }
 
-        // Accept anything that isn't another BossEnemy bullet.
-        // Player bullets (Ball prefab) have no special tag needed —
-        // if it hit us and it isn't our own bullet, count it.
-        BossEnemy sourceBoss = col.gameObject.GetComponent<BossEnemy>();
-        if (sourceBoss != null) return; // ignore boss-vs-boss if ever relevant
+    private void OnTriggerEnter(Collider other)
+    {
+        TryRegisterHit(other.gameObject);
+    }
 
-        // Check it's not one of our own spawned bullets by layer.
+    private void TryRegisterHit(GameObject source)
+    {
+        // Deduplicate: ignore if we already registered a hit this frame.
+        if (Time.frameCount == _lastHitFrame) return;
+
+        // Ignore ourselves.
+        if (source == gameObject) return;
+
+        // Ignore our own spawned enemy bullets by layer.
         int enemyBulletLayer = LayerMask.NameToLayer("EnemyBullet");
-        if (enemyBulletLayer != -1 && col.gameObject.layer == enemyBulletLayer) return;
+        if (enemyBulletLayer != -1 && source.layer == enemyBulletLayer) return;
 
+        // Ignore other BossEnemy objects.
+        if (source.GetComponent<BossEnemy>() != null) return;
+
+        // Anything else that touches us counts as a player hit.
+        _lastHitFrame = Time.frameCount;
         RegisterHit();
-        Debug.Log($"[BossEnemy] Hit registered from: {col.gameObject.name} | " +
-                  $"Total hits: {_hitsReceived} | Phase: {CurrentPhase()}");
+        Debug.Log($"[BossEnemy] Hit! Source: {source.name} | " +
+                  $"Total: {_hitsReceived} | Phase: {CurrentPhase()}");
     }
 
     // ------------------------------------------------------------------ //

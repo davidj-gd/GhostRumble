@@ -51,7 +51,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 1c71afe8a89494b1fbb232a4c9cf5471, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: f0729c5a8428f43e6aab2ef5c69d60f1, type: 2}
+      objectReference: {fileID: 2100000, guid: 1b4c8fb8515474289af7eef3732a5f18, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 1c71afe8a89494b1fbb232a4c9cf5471, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -7994650926060863905, guid: 1c71afe8a89494b1fbb232a4c9cf5471, type: 3}
     - target: {fileID: 919132149155446097, guid: 1c71afe8a89494b1fbb232a4c9cf5471, type: 3}
       propertyPath: m_Name
       value: Dash.Cones

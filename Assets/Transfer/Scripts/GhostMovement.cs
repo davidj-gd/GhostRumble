@@ -5,12 +5,12 @@ using UnityEngine;
 ///
 /// DASH BEHAVIOUR:
 ///   • Hold Shift to dash — increases movement speed / orbital spin speed.
-///   • Dash gauge drains while Shift is held, refills while released.
-///   • Gauge can be reused as soon as any fuel is available (no cooldown).
+///   • Dash is infinite — no gauge, no drain, no cooldown.
 ///   • During WASD: raises maxSpeed cap and adds extra forward force.
 ///   • During Q/E orbit: multiplies the orbital tangential force, making
 ///     the spin faster. Radial correction still holds the radius.
-///   • HUD reads: DashGauge (0-1), IsDashing.
+///   • VFX spawns on the OPPOSITE side of the movement direction (trail feel).
+///   • HUD reads: IsDashing (DashGauge always returns 1 for compatibility).
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class GhostMovement : MonoBehaviour
@@ -40,7 +40,7 @@ public class GhostMovement : MonoBehaviour
     public float orbitRadiusStiffness = 18f;
 
     // ── Dash ───────────────────────────────────────────────────────────────
-    [Header("Dash (Hold Shift)")]
+    [Header("Dash (Hold Shift) — Infinite")]
 
     [Tooltip("Extra force added on top of moveForce while dashing during WASD.")]
     public float dashExtraForce = 20f;
@@ -51,16 +51,6 @@ public class GhostMovement : MonoBehaviour
     [Tooltip("Multiplier applied to orbitForce while dashing during Q/E rotation. " +
              "e.g. 2.0 = twice as fast spin.")]
     public float dashOrbitMultiplier = 2.2f;
-
-    [Tooltip("Seconds to drain the gauge from full to empty while holding Shift.")]
-    public float dashDrainTime   = 2.5f;
-
-    [Tooltip("Seconds to refill the gauge from empty to full while not dashing.")]
-    public float dashRefillTime  = 3.5f;
-
-    [Tooltip("Minimum gauge needed to START dashing (prevents flickering near 0).")]
-    [Range(0f, 0.3f)]
-    public float dashMinToStart  = 0.05f;
 
     [Header("Dash VFX")]
     [Tooltip("The spawn point child transform on the character (empty GO). Place it where you want the effect to appear.")]
@@ -73,9 +63,9 @@ public class GhostMovement : MonoBehaviour
     public GameObject dashVFXPrefab;
 
     // ── Public state (read by GhostHUD) ───────────────────────────────────
-    /// Gauge level 0 (empty) → 1 (full)
+    /// Always 1 — dash is infinite. Kept for HUD compatibility.
     public float DashGauge  { get; private set; } = 1f;
-    /// True while Shift is held AND gauge is above zero
+    /// True while Shift is held
     public bool  IsDashing  { get; private set; }
 
     // ── Private ────────────────────────────────────────────────────────────
@@ -99,20 +89,8 @@ public class GhostMovement : MonoBehaviour
 
     void Update()
     {
-        // ── Dash gauge ─────────────────────────────────────────────────────
-        bool shiftHeld = Input.GetKey(KeyCode.LeftShift);
-
-        if (shiftHeld && DashGauge >= dashMinToStart)
-        {
-            IsDashing   = true;
-            DashGauge   = Mathf.Max(0f, DashGauge - Time.deltaTime / dashDrainTime);
-            if (DashGauge <= 0f) IsDashing = false; // ran out mid-hold
-        }
-        else
-        {
-            IsDashing = false;
-            DashGauge = Mathf.Min(1f, DashGauge + Time.deltaTime / dashRefillTime);
-        }
+        // ── Dash — infinite, no gauge ──────────────────────────────────────
+        IsDashing = Input.GetKey(KeyCode.LeftShift);
 
         HandleDashVFX();
 
@@ -194,59 +172,67 @@ public class GhostMovement : MonoBehaviour
 
     // ── Dash VFX ───────────────────────────────────────────────────────────
     //
+    //  The VFX spawns on the OPPOSITE side of the player's movement direction
+    //  so it reads as a motion trail rather than a forward effect.
+    //  dashVFXPoint still defines the offset distance from the character —
+    //  its local position is mirrored behind the velocity direction at runtime.
+    //
     //  Three cases, evaluated in order:
     //
-    //  1. dashVFXPrefab is assigned + contains a ParticleSystem
-    //     → Instantiate on dash start, Stop (with fade) on dash end.
+    //  1. dashVFXPrefab assigned + ParticleSystem on it
+    //     → Instantiate on dash start (behind movement), stop with fade on end.
     //
-    //  2. dashVFXPrefab is assigned + NO ParticleSystem (mesh / generic GO)
-    //     → Instantiate on dash start, Destroy immediately on dash end.
+    //  2. dashVFXPrefab assigned + no ParticleSystem (mesh / generic GO)
+    //     → Instantiate on dash start, destroy immediately on dash end.
+    //     → Position updates every frame to stay behind the moving character.
     //
-    //  3. dashVFXPrefab is null
-    //     → Look for a ParticleSystem already childed under dashVFXPoint
-    //       and Play/Stop it directly (original behaviour).
+    //  3. dashVFXPrefab null
+    //     → Drive a ParticleSystem already childed under dashVFXPoint directly.
     //
     void HandleDashVFX()
     {
         if (dashVFXPoint == null) return;
 
+        // Compute the spawn/follow position: behind the velocity direction.
+        // Uses the dashVFXPoint's distance from the character root as the offset.
+        Vector3 trailPosition = GetTrailPosition();
+
         if (dashVFXPrefab != null)
         {
             if (IsDashing && !vfxPlaying)
             {
-                // ── Spawn the prefab ──────────────────────────────────────
                 vfxPlaying            = true;
-                activeDashVFXInstance = Instantiate(dashVFXPrefab,
-                                                    dashVFXPoint.position,
+                activeDashVFXInstance = Instantiate(dashVFXPrefab, trailPosition,
                                                     dashVFXPoint.rotation);
                 activeDashVFXInstance.transform.SetParent(dashVFXPoint);
 
-                // Cache a ParticleSystem if one exists on the prefab.
                 activeDashVFXPS = activeDashVFXInstance.GetComponent<ParticleSystem>();
                 if (activeDashVFXPS == null)
                     activeDashVFXPS = activeDashVFXInstance.GetComponentInChildren<ParticleSystem>();
 
-                // Play if it's a particle system.
                 if (activeDashVFXPS != null)
                     activeDashVFXPS.Play();
             }
+            else if (IsDashing && vfxPlaying && activeDashVFXPS == null)
+            {
+                // Mesh/generic prefab: move it every frame to stay behind the player.
+                if (activeDashVFXInstance != null)
+                    activeDashVFXInstance.transform.position = trailPosition;
+            }
             else if (!IsDashing && vfxPlaying)
             {
-                // ── Remove the prefab instance ────────────────────────────
                 vfxPlaying = false;
 
                 if (activeDashVFXInstance != null)
                 {
                     if (activeDashVFXPS != null)
                     {
-                        // Particle system — stop emitting and let particles fade.
                         activeDashVFXPS.Stop(false, ParticleSystemStopBehavior.StopEmitting);
                         float fadeTime = activeDashVFXPS.main.startLifetime.constantMax + 0.2f;
                         Destroy(activeDashVFXInstance, fadeTime);
                     }
                     else
                     {
-                        // Mesh / generic prefab — destroy immediately.
                         Destroy(activeDashVFXInstance);
                     }
 
@@ -257,7 +243,9 @@ public class GhostMovement : MonoBehaviour
         }
         else
         {
-            // ── No prefab assigned: drive a child PS directly ─────────────
+            // No prefab — drive child PS directly. Move dashVFXPoint to trail pos.
+            dashVFXPoint.position = trailPosition;
+
             ParticleSystem ex = dashVFXPoint.GetComponentInChildren<ParticleSystem>();
             if (ex == null) return;
             if (IsDashing && !ex.isPlaying)
@@ -265,6 +253,30 @@ public class GhostMovement : MonoBehaviour
             else if (!IsDashing && ex.isPlaying)
                 ex.Stop(false, ParticleSystemStopBehavior.StopEmitting);
         }
+    }
+
+    /// <summary>
+    /// Returns the world position on the OPPOSITE side of the player's
+    /// current movement direction, at the same distance dashVFXPoint sits
+    /// from the character root in local space.
+    /// Falls back to dashVFXPoint's world position when the player is still.
+    /// </summary>
+    Vector3 GetTrailPosition()
+    {
+        // Distance from character root to dashVFXPoint (used as trail offset).
+        float offsetDist = dashVFXPoint.localPosition.magnitude;
+        if (offsetDist < 0.001f) offsetDist = 0.5f; // safe default
+
+        Vector3 flat = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        if (flat.sqrMagnitude > 0.01f)
+        {
+            // Behind = opposite of velocity direction.
+            Vector3 behind = -flat.normalized;
+            return transform.position + behind * offsetDist;
+        }
+
+        // Player is stationary — keep at current dashVFXPoint world position.
+        return dashVFXPoint.position;
     }
 
     // ── Tilt ───────────────────────────────────────────────────────────────

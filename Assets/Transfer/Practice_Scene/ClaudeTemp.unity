@@ -216,7 +216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 904fb555ae47443f38bba4d990abfaae, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -264,12 +264,12 @@ MonoBehaviour:
   shootOrigin: {fileID: 246170377}
   hitVFXPrefab: {fileID: 8381161782993815881, guid: 6e0ff12f27b98af4097edfa1aebaf6c5, type: 3}
   playerTarget: {fileID: 7384871606829832196}
-  hitsToIntermediate: 5
-  hitsToHard: 12
-  beginnerBulletCount: 4
+  hitsToIntermediate: 2
+  hitsToHard: 6
+  beginnerBulletCount: 6
   beginnerFanSpread: 60
   beginnerBulletSpeed: 6
-  beginnerFireInterval: 1.8
+  beginnerFireInterval: 1.5
   intermediateBulletCount: 8
   intermediateBulletSpeed: 9
   intermediateFireInterval: 1.2
@@ -543,6 +543,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1220597176326172391, guid: 7a2bef82af5054fb78db7ce0765c9594, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317028733213253113, guid: 7a2bef82af5054fb78db7ce0765c9594, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465252283151757057, guid: 7a2bef82af5054fb78db7ce0765c9594, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3930225482434034565, guid: 7a2bef82af5054fb78db7ce0765c9594, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.7332949
@@ -583,9 +595,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5367061551440203677, guid: 7a2bef82af5054fb78db7ce0765c9594, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6034992393936456337, guid: 7a2bef82af5054fb78db7ce0765c9594, type: 3}
       propertyPath: m_Name
       value: Arena+All.UV Final
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345926374315559612, guid: 7a2bef82af5054fb78db7ce0765c9594, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
