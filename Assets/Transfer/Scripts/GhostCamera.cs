@@ -1,28 +1,28 @@
 using UnityEngine;
 
 /// <summary>
-/// GhostCamera — Keeps two players always in view.
+/// GhostCamera — Keeps one or two players in view.
 ///
-/// The camera positions itself above the midpoint between the two targets.
-/// Distance is driven by how far apart the players are, clamped between
-/// a min and max zoom. The angle and offset you set in the editor is
-/// preserved as the "look direction" — only distance changes at runtime.
+/// If only targetA is assigned, the camera simply follows targetA at
+/// minDistance (no zoom logic, nothing to compare separation against).
+/// If both targets are assigned, it behaves as before: tracks the midpoint
+/// and zooms based on how far apart the two players are.
 ///
 /// SETUP:
 ///   1. Position and rotate the camera in the Scene view exactly how you
 ///      want it to look (angle, tilt, side offset — anything).
-///   2. Assign targetA (Player 1) and targetB (Player 2 / enemy).
+///   2. Assign targetA (Player 1). Assign targetB only if/when Player 2 exists.
 ///   3. Press Play — the camera holds your angle and slides in/out
-///      along that same axis based on player separation.
+///      along that same axis based on player separation (if targetB is set).
 /// </summary>
 public class GhostCamera : MonoBehaviour
 {
     [Header("Targets")]
-    public Transform targetA;   // Player 1
-    public Transform targetB;   // Player 2 / enemy
+    public Transform targetA;   // Player 1 — required
+    public Transform targetB;   // Player 2 / enemy — optional, can be left empty
 
     [Header("Zoom")]
-    [Tooltip("Closest the camera will get (used when players are on top of each other).")]
+    [Tooltip("Closest the camera will get (used when players are close, or when only targetA exists).")]
     public float minDistance = 10f;
 
     [Tooltip("Furthest the camera will pull back (used when players are at max separation).")]
@@ -35,74 +35,82 @@ public class GhostCamera : MonoBehaviour
     public float zoomSpeed = 4f;
 
     [Header("Follow Smoothing")]
-    [Tooltip("How quickly the camera moves to the midpoint.")]
+    [Tooltip("How quickly the camera moves to the target.")]
     public float followSpeed = 6f;
 
     // ── private ────────────────────────────────────────────────────────────
-    Vector3    camOffset;       // direction + distance snapshot from editor position
+    Vector3    camOffset;       // direction snapshot from editor position
     Vector3    smoothVel;
     float      smoothDist;
-    float      initialDistance;
 
     void Start()
     {
-        if (targetA == null || targetB == null)
+        if (targetA == null)
         {
-            Debug.LogError("[GhostCamera] Assign both targets in the Inspector!");
+            Debug.LogError("[GhostCamera] Assign targetA (Player 1) in the Inspector!");
             return;
         }
 
-        Vector3 midpoint = GetMidpoint();
+        Vector3 focusPoint = GetFocusPoint();
 
-        // Capture the offset direction from the initial midpoint so we
+        // Capture the offset direction from the initial focus point so we
         // always travel along the same axis the designer set in the editor.
-        camOffset       = transform.position - midpoint;
-        initialDistance = camOffset.magnitude;
-        smoothDist      = initialDistance;
+        camOffset  = transform.position - focusPoint;
+        smoothDist = HasSecondTarget() ? camOffset.magnitude : minDistance;
     }
 
     void LateUpdate()
     {
-        if (targetA == null || targetB == null) return;
+        if (targetA == null) return;
 
-        Vector3 midpoint   = GetMidpoint();
-        float   separation = Vector3.Distance(targetA.position, targetB.position);
+        Vector3 focusPoint = GetFocusPoint();
+        float   targetDist;
 
-        // Map separation to a target distance along the camera's offset axis.
-        // When separation = 0  → minDistance
-        // When separation is large → approaches maxDistance
-        // zoomPadding adds a small buffer so players aren't clipped to edges.
-        float targetDist = Mathf.Clamp(separation + zoomPadding, minDistance, maxDistance);
+        if (HasSecondTarget())
+        {
+            // Two players: zoom based on how far apart they are
+            float separation = Vector3.Distance(targetA.position, targetB.position);
+            targetDist = Mathf.Clamp(separation + zoomPadding, minDistance, maxDistance);
+        }
+        else
+        {
+            // Only one player: just hold at minDistance, no zoom logic needed
+            targetDist = minDistance;
+        }
 
-        // Smooth the distance change independently of position follow
         smoothDist = Mathf.Lerp(smoothDist, targetDist, Time.deltaTime * zoomSpeed);
 
-        // Desired position: midpoint + offset direction scaled to smoothed distance
-        Vector3 offsetDir    = camOffset.normalized;
-        Vector3 desiredPos   = midpoint + offsetDir * smoothDist;
+        Vector3 offsetDir  = camOffset.normalized;
+        Vector3 desiredPos = focusPoint + offsetDir * smoothDist;
 
         transform.position = Vector3.SmoothDamp(
             transform.position, desiredPos,
             ref smoothVel, 1f / followSpeed);
 
-        // Always look at the midpoint between the two players
-        transform.LookAt(midpoint);
+        transform.LookAt(focusPoint);
     }
 
-    Vector3 GetMidpoint()
+    bool HasSecondTarget() => targetB != null;
+
+    Vector3 GetFocusPoint()
     {
-        return (targetA.position + targetB.position) * 0.5f;
+        // Single target: just follow targetA directly.
+        // Two targets: follow the midpoint between them.
+        return HasSecondTarget()
+            ? (targetA.position + targetB.position) * 0.5f
+            : targetA.position;
     }
 
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
-        if (targetA == null || targetB == null) return;
-        Vector3 mid = GetMidpoint();
+        if (targetA == null) return;
+        Vector3 focus = GetFocusPoint();
         Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(transform.position, mid);
-        Gizmos.DrawWireSphere(mid, 0.4f);
-        Gizmos.DrawLine(targetA.position, targetB.position);
+        Gizmos.DrawLine(transform.position, focus);
+        Gizmos.DrawWireSphere(focus, 0.4f);
+        if (HasSecondTarget())
+            Gizmos.DrawLine(targetA.position, targetB.position);
     }
 #endif
 }
