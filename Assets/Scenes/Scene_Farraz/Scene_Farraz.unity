@@ -12148,7 +12148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2017796554831986025, guid: 32d111dd1c844b744b4f5da4d18a0e66, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3708590169131537615, guid: 32d111dd1c844b744b4f5da4d18a0e66, type: 3}
       propertyPath: m_LocalPosition.x
@@ -60045,6 +60045,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: ec5d95e60114e4fc39244d1f0c8d10b7, type: 2}
+    - target: {fileID: 1302065301601958221, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3569550181934937615, guid: df2884cf4749fe3478f4b64d4e1fd2a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0020393496
@@ -90635,7 +90639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7183068237775304384, guid: 3b29f02be67664c8eb93be628d1498fe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7558361983918845050, guid: 3b29f02be67664c8eb93be628d1498fe, type: 3}
       propertyPath: m_LocalPosition.x

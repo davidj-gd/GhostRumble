@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e3a2b1c4d546e7890123456789ab01, type: 3}
+  m_Name: MidBossAttack
+  idleSprite: {fileID: 21300000, guid: be7c3f7fad6c5434fa983371b71fc80e, type: 3}
+  attackFrames:
+  - {fileID: 1516959644, guid: b8a9355185ebb4beb9c3a78c2bce54b4, type: 3}
+  - {fileID: 438632038, guid: b8a9355185ebb4beb9c3a78c2bce54b4, type: 3}
+  - {fileID: 809937413, guid: b8a9355185ebb4beb9c3a78c2bce54b4, type: 3}
+  - {fileID: 1807469228, guid: b8a9355185ebb4beb9c3a78c2bce54b4, type: 3}
+  - {fileID: -497932923, guid: b8a9355185ebb4beb9c3a78c2bce54b4, type: 3}
+  - {fileID: -148412038, guid: b8a9355185ebb4beb9c3a78c2bce54b4, type: 3}
+  - {fileID: -605367941, guid: b8a9355185ebb4beb9c3a78c2bce54b4, type: 3}
+  - {fileID: -876644921, guid: b8a9355185ebb4beb9c3a78c2bce54b4, type: 3}
+  frameRate: 12

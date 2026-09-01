@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e3a2b1c4d546e7890123456789ab01, type: 3}
+  m_Name: MeleeEnemyAttack
+  idleSprite: {fileID: 21300000, guid: 846a263a21214d74a8d72e42690cce6e, type: 3}
+  attackFrames:
+  - {fileID: -1649144006, guid: bb620764e531f412789b63bcd6c98a3a, type: 3}
+  - {fileID: 1784396614, guid: bb620764e531f412789b63bcd6c98a3a, type: 3}
+  - {fileID: 1519251776, guid: bb620764e531f412789b63bcd6c98a3a, type: 3}
+  - {fileID: 692895058, guid: bb620764e531f412789b63bcd6c98a3a, type: 3}
+  - {fileID: 684076320, guid: bb620764e531f412789b63bcd6c98a3a, type: 3}
+  - {fileID: 405063349, guid: bb620764e531f412789b63bcd6c98a3a, type: 3}
+  - {fileID: -42836702, guid: bb620764e531f412789b63bcd6c98a3a, type: 3}
+  - {fileID: 1506185668, guid: bb620764e531f412789b63bcd6c98a3a, type: 3}
+  frameRate: 14

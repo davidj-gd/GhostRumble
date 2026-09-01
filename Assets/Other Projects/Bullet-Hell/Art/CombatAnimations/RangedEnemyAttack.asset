@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e3a2b1c4d546e7890123456789ab01, type: 3}
+  m_Name: RangedEnemyAttack
+  idleSprite: {fileID: 21300000, guid: ce1198f3d9874bb4a0247bb1f96464cb, type: 3}
+  attackFrames:
+  - {fileID: -2034986735, guid: ef1d649579a504ee485f87854464fe5f, type: 3}
+  - {fileID: 316785247, guid: ef1d649579a504ee485f87854464fe5f, type: 3}
+  - {fileID: 619412373, guid: ef1d649579a504ee485f87854464fe5f, type: 3}
+  - {fileID: 1049343181, guid: ef1d649579a504ee485f87854464fe5f, type: 3}
+  - {fileID: 1449532556, guid: ef1d649579a504ee485f87854464fe5f, type: 3}
+  - {fileID: -693337084, guid: ef1d649579a504ee485f87854464fe5f, type: 3}
+  - {fileID: -1767966557, guid: ef1d649579a504ee485f87854464fe5f, type: 3}
+  - {fileID: 1248445615, guid: ef1d649579a504ee485f87854464fe5f, type: 3}
+  frameRate: 14

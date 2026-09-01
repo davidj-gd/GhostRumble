@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e3a2b1c4d546e7890123456789ab01, type: 3}
+  m_Name: PlayerAttack
+  idleSprite: {fileID: 21300000, guid: 94f79d8c6ab0248f8af3ffffc98f71ea, type: 3}
+  attackFrames:
+  - {fileID: -996654606, guid: e9b80baa8bd2541ae93f78a80fd23f70, type: 3}
+  - {fileID: 58443556, guid: e9b80baa8bd2541ae93f78a80fd23f70, type: 3}
+  - {fileID: 867804295, guid: e9b80baa8bd2541ae93f78a80fd23f70, type: 3}
+  - {fileID: 958101489, guid: e9b80baa8bd2541ae93f78a80fd23f70, type: 3}
+  - {fileID: 277042652, guid: e9b80baa8bd2541ae93f78a80fd23f70, type: 3}
+  - {fileID: 1482532970, guid: e9b80baa8bd2541ae93f78a80fd23f70, type: 3}
+  - {fileID: -1994213271, guid: e9b80baa8bd2541ae93f78a80fd23f70, type: 3}
+  - {fileID: 1002243288, guid: e9b80baa8bd2541ae93f78a80fd23f70, type: 3}
+  - {fileID: 505033556, guid: e9b80baa8bd2541ae93f78a80fd23f70, type: 3}
+  - {fileID: -1494918570, guid: e9b80baa8bd2541ae93f78a80fd23f70, type: 3}
+  frameRate: 14
